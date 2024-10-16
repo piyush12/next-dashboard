@@ -1,0 +1,5 @@
+.label {
+  @apply text-inputLabel
+     text-light-primary
+    dark:text-dark-primary;
+}

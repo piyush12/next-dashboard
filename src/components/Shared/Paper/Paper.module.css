@@ -1,0 +1,5 @@
+.paper {
+  @apply m-auto
+    bg-light-paperBg
+    dark:bg-dark-paperBg;
+}

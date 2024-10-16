@@ -1,0 +1,62 @@
+.link {
+  &.none {
+    @apply no-underline;
+  }
+  &.always {
+    @apply underline;
+  }
+  &.hover {
+    &:hover {
+      @apply underline;
+    }
+  }
+
+  &.error {
+    @apply text-error-500 dark:text-error-500;
+    &:hover {
+      @apply text-error-600
+          active:text-error-800;
+    }
+  }
+
+  &.warning {
+    @apply text-warning-500 dark:text-warning-500;
+    &:hover {
+      @apply text-warning-600
+          active:text-warning-800;
+    }
+  }
+
+  &.info {
+    @apply text-info-500 dark:text-info-500;
+    &:hover {
+      @apply text-info-600
+          active:text-info-800;
+    }
+  }
+
+  &.primary {
+    @apply text-purple-500 dark:text-purple-500;
+
+    &:hover {
+      @apply text-purple-600
+        active:text-purple-800;
+    }
+  }
+
+  &.secondary {
+    @apply text-gray-500 dark:text-gray-500;
+    &:hover {
+      @apply text-gray-600
+          active:text-gray-800;
+    }
+  }
+
+  &.success {
+    @apply text-success-500 dark:text-success-500;
+    &:hover {
+      @apply text-success-600
+          active:text-success-800;
+    }
+  }
+}

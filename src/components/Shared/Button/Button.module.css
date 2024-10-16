@@ -1,0 +1,204 @@
+.button {
+  @apply relative
+    inline-flex
+    justify-center
+    gap-2
+    rounded-md
+    text-center
+    text-buttonMedium
+    text-light-primary
+    dark:text-dark-primary;
+
+  &.primary {
+    @apply bg-purple-500
+      text-white;
+
+    &.label {
+      @apply text-purple-500;
+    }
+
+    &.outline {
+      @apply border-purple-500
+      text-purple-500;
+    }
+
+    &.text {
+      @apply bg-transparent
+      text-purple-500;
+    }
+  }
+  &.secondary {
+    @apply bg-gray-500
+      text-white;
+
+    &.label {
+      @apply text-gray-500;
+    }
+
+    &.outline {
+      @apply border-gray-500
+      text-gray-500;
+    }
+    &.text {
+      @apply bg-transparent
+      text-gray-500;
+    }
+  }
+  &.error {
+    @apply bg-error-500
+      text-white;
+
+    &.label {
+      @apply text-error-500;
+    }
+
+    &.outline {
+      @apply border-error-500
+      text-error-500;
+    }
+    &.text {
+      @apply bg-transparent
+      text-error-500;
+    }
+  }
+  &.warning {
+    @apply bg-warning-500
+      text-white;
+
+    &.label {
+      @apply text-warning-500;
+    }
+
+    &.outline {
+      @apply border-warning-500
+      text-warning-500;
+    }
+    &.text {
+      @apply bg-transparent
+      text-warning-500;
+    }
+  }
+  &.info {
+    @apply bg-info-500
+      text-white;
+
+    &.label {
+      @apply text-info-500;
+    }
+
+    &.outline {
+      @apply border-info-500
+      text-info-500;
+    }
+    &.text {
+      @apply bg-transparent
+      text-info-500;
+    }
+  }
+
+  &.success {
+    @apply bg-success-500
+      text-white;
+
+    &.label {
+      @apply text-success-500;
+    }
+
+    &.outline {
+      @apply border-success-500
+      text-success-500;
+    }
+    &.text {
+      @apply bg-transparent
+      text-success-500;
+    }
+  }
+
+  &.default {
+    @apply bg-opacity-100;
+    &:disabled {
+      @apply cursor-not-allowed
+      opacity-30;
+    }
+    &:hover:not(:disabled) {
+      @apply bg-opacity-90;
+    }
+
+    &:focus:not(:disabled) {
+      @apply bg-opacity-90;
+    }
+    &:active:not(:disabled) {
+      @apply bg-opacity-80;
+    }
+  }
+
+  &.label {
+    @apply bg-opacity-15;
+    &:disabled {
+      @apply cursor-not-allowed
+      opacity-30;
+    }
+    &:hover:not(:disabled) {
+      @apply bg-opacity-10;
+    }
+
+    &:focus:not(:disabled) {
+      @apply bg-opacity-15;
+    }
+    &:active:not(:disabled) {
+      @apply bg-opacity-5;
+    }
+  }
+
+  &.outline {
+    @apply border-[1px]
+    bg-transparent;
+    &:disabled {
+      @apply cursor-not-allowed
+      opacity-30;
+    }
+    &:hover:not(:disabled) {
+      @apply border-opacity-90;
+    }
+
+    &:focus:not(:disabled) {
+      @apply border-opacity-90;
+    }
+    &:active:not(:disabled) {
+      @apply border-opacity-80;
+    }
+  }
+
+  &.text {
+    &:disabled {
+      @apply cursor-not-allowed
+      opacity-30;
+    }
+    &:hover:not(:disabled) {
+      @apply text-opacity-90;
+    }
+
+    &:focus:not(:disabled) {
+      @apply text-opacity-90;
+    }
+    &:active:not(:disabled) {
+      @apply text-opacity-80;
+    }
+  }
+
+  &.large {
+    @apply px-[20px]
+    py-[10px]
+    text-buttonLarge;
+  }
+  &.medium {
+    @apply px-[14px]
+    py-[7px]
+    text-buttonMedium;
+  }
+  &.small {
+    @apply px-[14px]
+    py-[6px]
+    text-buttonSmall;
+  }
+}

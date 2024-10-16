@@ -1,0 +1,60 @@
+.textField {
+  &.fullWidth {
+    @apply w-full;
+  }
+
+  &.outline {
+    @apply border-[1px]
+        border-light-border
+        bg-transparent
+        dark:border-dark-border
+        dark:text-dark-primary;
+
+    &.error {
+      @apply border-error-500;
+      &:focus {
+        @apply border-error-500;
+      }
+    }
+
+    &.success {
+      @apply border-success-500;
+      &:focus {
+        @apply border-success-500;
+      }
+    }
+
+    &:focus {
+      @apply border-purple-500;
+    }
+  }
+
+  &.filled {
+    @apply bg-light-primary/5
+    text-light-primary
+    dark:bg-dark-primary/5
+    dark:text-dark-primary;
+
+    &.error {
+      @apply bg-error-500
+      placeholder-error-300
+      text-white;
+      &:focus {
+        @apply border-error-500;
+      }
+    }
+
+    &.success {
+      @apply bg-success-500
+      text-white
+      placeholder-success-300;
+      &:focus {
+        @apply border-success-500;
+      }
+    }
+
+    &:focus {
+      @apply border-purple-500;
+    }
+  }
+}
