@@ -18,7 +18,7 @@ function Table({
     className,
   );
   return (
-    <Paper className="w-full p-3">
+    <Paper className="w-full  pb-3 pl-6 pr-6 pt-3">
       <div className="min-w-full">
         <table className={classes} {...props}>
           {children}

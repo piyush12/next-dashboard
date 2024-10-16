@@ -4,6 +4,7 @@ import { Badge } from "@/components/Shared/Badge";
 import Box from "@/components/Shared/Box";
 import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
+import Label from "@/components/Shared/Label";
 import { Pagination } from "@/components/Shared/Pagination";
 import Paper from "@/components/Shared/Paper";
 import Select from "@/components/Shared/Select/Select";
@@ -16,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/Shared/Table";
+import Text from "@/components/Shared/Text";
 import TextField from "@/components/Shared/TextField";
 import {
   IconDeviceLaptop,
@@ -47,7 +49,7 @@ function Invoice() {
     <Box>
       <Flex className="p-4">
         {/* TOP MENU */}
-        <Paper className="w-full p-3">
+        <Paper className="w-full pb-3 pl-6 pr-6 pt-3">
           <Flex align="center" justify="between">
             <Flex align="center" direction="row-reverse" className="w-10/12">
               <TextField type="text" placeholder="Search..." fullWidth>
@@ -136,12 +138,65 @@ function Invoice() {
       </Flex>
 
       <Flex className="p-4">
-        <Box className="w-3/4">
-          <Paper className="p-3">Invoice preview</Paper>
-        </Box>
-        <Box className="w-1/4">
-          <Paper className="p-3">Invoice control</Paper>
-        </Box>
+        <Paper className="w-full pb-3 pl-6 pr-6 pt-3">
+          <Box className="dark:border-b-dark-divider border-b-light-divider mb-8 border-b-[1px] pb-4 pt-4">
+            <Text as="p">Add Invoice</Text>
+          </Box>
+
+          <Flex gap="6">
+            <Box className="w-2/4">
+              <Flex direction="column" gap="5">
+                <Label htmlFor="name">Biller Name</Label>
+                <TextField
+                  type="text"
+                  id="name"
+                  name="name"
+                  fullWidth
+                ></TextField>
+              </Flex>
+            </Box>
+            <Box className="w-2/4">
+              <Flex direction="column" gap="5">
+                <Label htmlFor="name">Biller Email</Label>
+                <TextField
+                  type="text"
+                  id="name"
+                  name="name"
+                  fullWidth
+                ></TextField>
+              </Flex>
+            </Box>
+          </Flex>
+
+          <Flex gap="6" className="mt-8">
+            <Box className="w-2/4">
+              <Flex direction="column" gap="5">
+                <Label htmlFor="name">Value</Label>
+                <TextField
+                  type="text"
+                  id="name"
+                  name="name"
+                  fullWidth
+                ></TextField>
+              </Flex>
+            </Box>
+            <Box className="w-2/4">
+              <Flex direction="column" gap="5">
+                <Label htmlFor="name">Description</Label>
+                <TextField
+                  type="text"
+                  id="name"
+                  name="name"
+                  fullWidth
+                ></TextField>
+              </Flex>
+            </Box>
+          </Flex>
+
+          <Flex gap="6" className="mb-8 mt-8">
+            <Button colors="primary">Submit</Button>
+          </Flex>
+        </Paper>
       </Flex>
     </Box>
   );
