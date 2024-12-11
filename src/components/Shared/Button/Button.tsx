@@ -14,7 +14,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 function Button(
   {
-    variant = "default",
+    variant,
     children,
     fullwidth = false,
     size = "medium",
@@ -27,7 +27,7 @@ function Button(
   const fullwidthClass = fullwidth ? "w-full" : "";
   const buttonClass = cn(
     styles.button,
-    styles[variant],
+    styles[variant || ""],
     styles[size],
     styles[colors || ""],
     fullwidthClass,

@@ -160,6 +160,7 @@ const config: Config = {
       },
       transparent: "transparent",
       white: "#ffffff",
+      github: "#242830",
     },
 
     fontWeight: {

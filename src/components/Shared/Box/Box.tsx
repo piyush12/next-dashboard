@@ -5,11 +5,18 @@ type BoxProps = {
   as?: "div" | "span";
   children: React.ReactNode;
   className?: string;
-  display?: "none" | "inline" | "inline-block" | "block";
+  display?:
+    | "none"
+    | "inline"
+    | "inline-block"
+    | "block"
+    | "inline-flex"
+    | "flex";
+  gap?: string;
 };
 
 function Box(
-  { as: Tag = "div", children, className, display, ...props }: BoxProps,
+  { as: Tag = "div", children, className, display, gap, ...props }: BoxProps,
   ref: Ref<HTMLDivElement>,
 ) {
   const BoxClasses = clsx(display, className);

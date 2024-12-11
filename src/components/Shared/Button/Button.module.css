@@ -9,7 +9,7 @@
     text-light-primary
     dark:text-dark-primary;
 
-  &.primary {
+  &.default {
     @apply bg-purple-500
       text-white;
 

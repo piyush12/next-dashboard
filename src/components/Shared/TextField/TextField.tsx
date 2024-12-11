@@ -1,7 +1,6 @@
+import { cn } from "@/utils/utils";
 import React, { InputHTMLAttributes } from "react";
 import styles from "./TextField.module.css";
-import clsx from "clsx";
-import { cn } from "@/utils/utils";
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   placeholder?: string;
