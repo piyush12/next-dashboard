@@ -1,10 +1,16 @@
 "use server";
 
-import { db } from "@/db";
-import { Invoices } from "@/db/schema";
 import { redirect } from "next/navigation";
 
+import { auth } from "@/auth";
+import { db } from "@/db";
+import { Invoices } from "@/db/schema";
+
 export async function createInvoiceAction(formData: FormData) {
+  const session = await auth();
+  if (!session || !session.user || !session.user.id) {
+    return;
+  }
   const value = Math.floor(
     Number.parseFloat(String(formData.get("value"))) * 100,
   );
@@ -15,6 +21,7 @@ export async function createInvoiceAction(formData: FormData) {
     .values({
       value,
       description,
+      userId: session.user.id,
       status: "open",
     })
     .returning({

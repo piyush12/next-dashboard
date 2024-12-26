@@ -1,12 +1,14 @@
+import React from "react";
+
 import RegisterComponent from "@/components/Auth/Register";
 import { SignUpFormData } from "@/components/Auth/validation";
 import Flex from "@/components/Shared/Flex";
 import Text from "@/components/Shared/Text";
-import React from "react";
 
 function SignUp() {
   async function onFormSubmit(formData: SignUpFormData) {
     "use server";
+    console.log("formData", formData);
   }
 
   return (

@@ -1,5 +1,7 @@
-import { cn } from "@/utils/utils";
 import React, { ComponentProps, forwardRef, Ref } from "react";
+
+import { cn } from "@/utils/utils";
+
 import styles from "./Paper.module.css";
 
 type PaperProps = ComponentProps<"div"> & {

@@ -1,5 +1,9 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+
 import Box from "@/components/Shared/Box";
 import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
@@ -7,10 +11,9 @@ import Label from "@/components/Shared/Label";
 import NavLink from "@/components/Shared/Link";
 import Text from "@/components/Shared/Text";
 import TextField from "@/components/Shared/TextField";
-import Link from "next/link";
+
 import { SignUpFormData, SignUpSchema } from "./validation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 
 function RegisterComponent({
   onFormSubmit,

@@ -1,5 +1,6 @@
-import clsx from "clsx";
 import React from "react";
+
+import clsx from "clsx";
 
 type Idrection = "row" | "column" | "row-reverse" | "column-reverse";
 type IJustify = "start" | "center" | "end" | "between";
@@ -17,7 +18,7 @@ type FlexProps<T extends React.ElementType = "div"> = {
   align?: IAlign;
   display?: "none" | "inline" | "flex";
   direction?: Idrection;
-  as?: "div" | "span";
+  as?: "div" | "span" | "header" | "footer";
   gap?: string;
   className?: string;
   children: React.ReactNode;

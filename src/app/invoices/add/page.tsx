@@ -1,9 +1,10 @@
 "use client";
+import { SyntheticEvent, useState } from "react";
+
 import { createInvoiceAction } from "@/app/actions/invoice-action";
 import { InvoiceForm } from "@/components/Invoice";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
-import { SyntheticEvent, useState } from "react";
 
 function AddNewInvoice() {
   const [formState, setFormState] = useState("ready");

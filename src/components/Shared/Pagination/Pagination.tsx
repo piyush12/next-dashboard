@@ -1,13 +1,15 @@
 "use client";
-import Button from "@/components/Shared/Button";
-import Flex from "@/components/Shared/Flex";
-import Select from "@/components/Shared/Select/Select";
 import {
   IconChevronLeft,
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
 } from "@tabler/icons-react";
+
+import Button from "@/components/Shared/Button";
+import Flex from "@/components/Shared/Flex";
+import Select from "@/components/Shared/Select/Select";
+
 import { usePagination } from "./usePagination";
 
 type IPaginationProps = {
@@ -17,12 +19,7 @@ type IPaginationProps = {
   onChange: (page: number) => void;
 };
 
-function Pagination({
-  page,
-  total,
-  itemPerPage = 5,
-  onChange,
-}: IPaginationProps) {
+function Pagination({ page, total, itemPerPage = 5 }: IPaginationProps) {
   const paginate = Math.ceil(total / itemPerPage);
 
   const paginateItems = usePagination({

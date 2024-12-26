@@ -1,9 +1,10 @@
+import React from "react";
+
 import {
   CheckboxCheckedIcon,
   CheckboxIcon,
 } from "@/components/Icons/CheckboxIcon";
 import { ColorMapping, Colors } from "@/types/global";
-import React from "react";
 
 const COLORFill: ColorMapping = {
   primary: "fill-purple-500",

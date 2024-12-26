@@ -1,6 +1,7 @@
+import React from "react";
+
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
-import React from "react";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (

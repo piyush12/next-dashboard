@@ -1,5 +1,10 @@
-import { users } from "@/app/invoices/page";
 import React from "react";
+
+import { IconEye } from "@tabler/icons-react";
+import Link from "next/link";
+
+import { users } from "@/app/invoices/page";
+import { Badge } from "@/components/Shared/Badge";
 import Flex from "@/components/Shared/Flex";
 import { Pagination } from "@/components/Shared/Pagination";
 import {
@@ -13,11 +18,8 @@ import {
 } from "@/components/Shared/Table";
 import { db } from "@/db";
 import { Invoices } from "@/db/schema";
-import { Badge } from "@/components/Shared/Badge";
-import Link from "next/link";
-import { IconEye } from "@tabler/icons-react";
-import { cn } from "@/utils/utils";
 import { InvoiceStatusClass } from "@/utils/constants";
+import { cn } from "@/utils/utils";
 
 const columns = [
   { name: "ID", uid: "id", sortable: true },
@@ -33,6 +35,7 @@ async function InvoiceTable() {
   const results = await db.select().from(Invoices);
   async function handleChange(page: number) {
     "use server";
+    console.log("page", page);
   }
   return (
     <Table>
@@ -65,13 +68,10 @@ async function InvoiceTable() {
                     ) : column.uid === "value" ? (
                       `$ ${(result[column.uid] / 100).toFixed(2)}`
                     ) : column.uid === "date" ? (
-                      <>
-                        {/* @ts-ignore */}
-                        {new Date(result["createTs"]).toLocaleDateString()}
-                      </>
+                      <>{new Date(result["createTs"]).toLocaleDateString()}</>
                     ) : (
                       <>
-                        {/* @ts-ignore */}
+                        {/* @ts-expect-error  will fix letter*/}
                         {result[column.uid]}
                       </>
                     )}

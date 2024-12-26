@@ -1,12 +1,12 @@
+import { IconBrandGithub } from "@tabler/icons-react";
+
+import { signIn } from "@/auth";
 import LoginComponent from "@/components/Auth/Login";
+import { LoginFormData } from "@/components/Auth/validation";
 import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
 import Text from "@/components/Shared/Text";
 import { ROUTES } from "@/utils/constants";
-import { IconBrandGithub } from "@tabler/icons-react";
-
-import { LoginFormData } from "@/components/Auth/validation";
-import { signIn } from "@/auth";
 
 function Login() {
   async function handleSignInGithub() {
@@ -18,6 +18,7 @@ function Login() {
 
   async function onFormSubmit(params: LoginFormData) {
     "use server";
+    console.log("params", params);
   }
 
   return (

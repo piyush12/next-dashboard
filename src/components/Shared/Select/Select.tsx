@@ -1,5 +1,7 @@
-import { cn } from "@/utils/utils";
 import { FC, ReactNode } from "react";
+
+import { cn } from "@/utils/utils";
+
 import Content from "./Content";
 import MenuProvider from "./Context";
 import Item from "./Item";
@@ -26,7 +28,7 @@ const Select = <T,>({ children, className, onChange }: SelectProps<T>) => {
 
 Select.displayName = "Select";
 
-type SelectTrigger = {
+type SelectTriggerProps = {
   children?: ReactNode;
   className?: string;
   chevron?: boolean;
@@ -35,7 +37,7 @@ const SelectTrigger = ({
   children,
   className,
   chevron = true,
-}: SelectTrigger) => {
+}: SelectTriggerProps) => {
   return (
     <TriggerMenu className={className} chevron={chevron}>
       {children}
@@ -45,13 +47,17 @@ const SelectTrigger = ({
 
 SelectTrigger.displayName = "Select.Trigger";
 
-type SelectContent = {
+type SelectContentProps = {
   children: ReactNode;
   className?: string;
   onChange?: (value: string) => void;
 };
 
-const SelectContent = ({ children, className, onChange }: SelectContent) => {
+const SelectContent = ({
+  children,
+  className,
+  onChange,
+}: SelectContentProps) => {
   return (
     <Content className={className} onChange={onChange}>
       {children}

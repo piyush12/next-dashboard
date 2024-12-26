@@ -1,6 +1,8 @@
 import React, { ComponentProps } from "react";
-import styles from "./Label.module.css";
+
 import clsx from "clsx";
+
+import styles from "./Label.module.css";
 
 type LabelProps = ComponentProps<"label"> & {
   htmlFor: string;

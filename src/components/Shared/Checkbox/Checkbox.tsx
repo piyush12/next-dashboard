@@ -1,8 +1,12 @@
 "use client";
-import { Colors } from "@/types/global";
-import clsx from "clsx";
 import React from "react";
+
+import clsx from "clsx";
+
+import { Colors } from "@/types/global";
+
 import Label from "../Label";
+
 import styles from "./Checkbox.module.css";
 import Icon from "./Icon";
 

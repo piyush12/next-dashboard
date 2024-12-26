@@ -1,8 +1,9 @@
 import React, { forwardRef, Ref } from "react";
+
 import clsx from "clsx";
 
 type BoxProps = {
-  as?: "div" | "span";
+  as?: "div" | "span" | "footer";
   children: React.ReactNode;
   className?: string;
   display?:
@@ -19,7 +20,7 @@ function Box(
   { as: Tag = "div", children, className, display, gap, ...props }: BoxProps,
   ref: Ref<HTMLDivElement>,
 ) {
-  const BoxClasses = clsx(display, className);
+  const BoxClasses = clsx(display, className, gap);
   return (
     <Tag className={BoxClasses} ref={ref} {...props}>
       {children}

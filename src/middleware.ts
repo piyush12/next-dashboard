@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { auth } from "./auth";
 
 // 1. Specify protected and public routes

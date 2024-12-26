@@ -1,8 +1,10 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useDropDownMenu } from "./Context";
-import { cn } from "@/utils/utils";
+
 import Paper from "@/components/Shared/Paper";
+import { cn } from "@/utils/utils";
+
+import { useDropDownMenu } from "./Context";
 
 function Content({
   children,

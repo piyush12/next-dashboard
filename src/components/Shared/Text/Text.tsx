@@ -1,7 +1,10 @@
 import React from "react";
+
 import clsx from "clsx";
-import styles from "./Text.module.css";
+
 import { Colors, TextVariant } from "@/types/global";
+
+import styles from "./Text.module.css";
 
 type AllowedTags = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "p";
 

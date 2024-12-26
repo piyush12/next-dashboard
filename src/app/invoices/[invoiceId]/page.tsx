@@ -1,15 +1,17 @@
 import React from "react";
+
+import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
+
+import { Badge } from "@/components/Shared/Badge";
 import Box from "@/components/Shared/Box";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import Text from "@/components/Shared/Text";
 import { db } from "@/db";
 import { Invoices } from "@/db/schema";
-import { eq } from "drizzle-orm";
-import { Badge } from "@/components/Shared/Badge";
-import { cn } from "@/utils/utils";
 import { InvoiceStatusClass } from "@/utils/constants";
+import { cn } from "@/utils/utils";
 
 async function InvoicePage({
   params,

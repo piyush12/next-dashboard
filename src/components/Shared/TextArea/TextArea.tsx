@@ -1,6 +1,8 @@
 import React, { InputHTMLAttributes } from "react";
-import styles from "./TextArea.module.css";
+
 import { cn } from "@/utils/utils";
+
+import styles from "./TextArea.module.css";
 
 type TextAreaProps = InputHTMLAttributes<HTMLTextAreaElement> & {
   placeholder: string;

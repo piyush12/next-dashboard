@@ -1,5 +1,6 @@
-import { range } from "@/utils/utils";
 import { useCallback, useEffect, useMemo, useState } from "react";
+
+import { range } from "@/utils/utils";
 
 export enum PaginationItemType {
   DOTS = "dots",
@@ -58,16 +59,21 @@ export function usePagination(props: UsePaginationProps) {
 
   const isRTL = false;
 
-  const onChangeActivePage = (newPage: number) => {
-    setActivePage(newPage);
-    onChange && onChange(newPage);
-  };
+  const onChangeActivePage = useCallback(
+    (newPage: number) => {
+      setActivePage(newPage);
+      // TODO will fix later
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      onChange && onChange(newPage);
+    },
+    [onChange],
+  );
 
   useEffect(() => {
     if (page && page !== activePage) {
       setActivePage(page);
     }
-  }, [page]);
+  }, [activePage, page]);
 
   const setPage = useCallback(
     (pageNumber: number) => {
@@ -79,7 +85,7 @@ export function usePagination(props: UsePaginationProps) {
         onChangeActivePage(pageNumber);
       }
     },
-    [total, activePage, onChangeActivePage],
+    [total, onChangeActivePage],
   );
 
   const next = () =>

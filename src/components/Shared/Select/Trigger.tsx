@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
-import { useSelect } from "./Context";
-import Button from "@/components/Shared/Button";
+
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+
+import Button from "@/components/Shared/Button";
+
+import { useSelect } from "./Context";
 
 function TriggerMenu({
   children,

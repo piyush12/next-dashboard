@@ -1,7 +1,8 @@
 import React, { ComponentProps, TableHTMLAttributes } from "react";
+
+import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import { cn } from "@/utils/utils";
-import Flex from "@/components/Shared/Flex";
 
 type IProps = {
   children: React.ReactNode;

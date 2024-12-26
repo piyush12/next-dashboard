@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import DropdownMenu from "./DropdownMenu";
 import Button from "@/components/Shared/Button";
+
+import DropdownMenu from "./DropdownMenu";
 
 const meta = {
   component: DropdownMenu,

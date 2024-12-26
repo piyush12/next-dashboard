@@ -1,13 +1,13 @@
-import { auth, signOut } from "@/auth";
+import { signOut } from "@/auth";
 import { Header } from "@/components/Header";
 import InvoiceTable from "@/components/Invoice/InvoiceTable";
 import Box from "@/components/Shared/Box";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
-import { ROUTES } from "@/utils/constants";
+
+import { ROUTES } from "../../utils/constants";
 
 async function Invoice() {
-  const session = await auth();
   async function handleSignOut() {
     "use server";
     await signOut({

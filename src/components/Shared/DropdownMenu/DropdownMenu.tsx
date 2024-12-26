@@ -1,6 +1,8 @@
+import { FC, ReactNode } from "react";
+
 import Flex from "@/components/Shared/Flex";
 import { cn } from "@/utils/utils";
-import { FC, ReactNode } from "react";
+
 import Content from "./Content";
 import MenuProvider from "./Context";
 import TriggerMenu from "./TriggerMenu";
@@ -22,21 +24,24 @@ const DropdownMenu = ({ children, className }: DropdownMenuProps) => {
 
 DropdownMenu.displayName = "DropdownMenu";
 
-type DropdownMenuTrigger = {
+type DropdownMenuTriggerProps = {
   children: ReactNode;
 };
-const DropdownMenuTrigger = ({ children }: DropdownMenuTrigger) => {
+const DropdownMenuTrigger = ({ children }: DropdownMenuTriggerProps) => {
   return <TriggerMenu>{children}</TriggerMenu>;
 };
 
 DropdownMenuTrigger.displayName = "DropdownMenu.Trigger";
 
-type DropdownMenuContent = {
+type DropdownMenuContentProps = {
   children: ReactNode;
   className?: string;
 };
 
-const DropdownMenuContent = ({ children, className }: DropdownMenuContent) => {
+const DropdownMenuContent = ({
+  children,
+  className,
+}: DropdownMenuContentProps) => {
   return <Content className={className}>{children}</Content>;
 };
 

@@ -1,6 +1,8 @@
+import React, { forwardRef, Ref } from "react";
+
 import { Colors, Size } from "@/types/global";
 import { cn } from "@/utils/utils";
-import React, { forwardRef, Ref } from "react";
+
 import styles from "./Button.module.css";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -8,7 +10,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   fullwidth?: boolean;
   size?: Size;
-  colors?: Colors;
+  color?: Colors;
   className?: string;
 };
 
@@ -18,20 +20,22 @@ function Button(
     children,
     fullwidth = false,
     size = "medium",
-    colors,
+    color,
     className,
     ...props
   }: ButtonProps,
   ref: Ref<HTMLButtonElement>,
 ) {
-  const fullwidthClass = fullwidth ? "w-full" : "";
   const buttonClass = cn(
     styles.button,
     styles[variant || ""],
     styles[size],
-    styles[colors || ""],
-    fullwidthClass,
+    styles[color || ""],
+    "cursor-pointer",
     className,
+    {
+      "w-full": fullwidth,
+    },
   );
 
   return (

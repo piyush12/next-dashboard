@@ -2,6 +2,58 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:storybook/recommended"
-  ]
+    "plugin:storybook/recommended",
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  /**
+    Explanation of Configuration
+
+    Groups: Defines the logical order of import types:
+        builtin: Node.js built-in modules (e.g., fs, path).
+        external: External libraries (e.g., react, lodash).
+        internal: Your project's internal modules.
+        parent: Parent directories (../).
+        sibling: Sibling files (./file).
+        index: Index files (./).
+
+    Path Groups: Allows you to add exceptions for specific modules like react and ensure they are sorted in a specific order.
+
+    Newlines Between: Enforces newline spacing between groups.
+
+    Alphabetize: Automatically sorts imports alphabetically, optionally ignoring case.
+  **/
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "varsIgnorePattern": "^key$" }
+    ]
+  }
 }

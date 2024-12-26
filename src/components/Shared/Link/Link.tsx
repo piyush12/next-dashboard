@@ -1,6 +1,9 @@
 import React from "react";
-import { Colors } from "@/types/global";
+
 import clsx from "clsx";
+
+import { Colors } from "@/types/global";
+
 import styles from "./Link.module.css";
 
 type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
