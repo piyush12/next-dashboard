@@ -1,5 +1,4 @@
 .paper {
-  @apply m-auto
-    bg-light-paperBg
+  @apply bg-light-paperBg
     dark:bg-dark-paperBg;
 }

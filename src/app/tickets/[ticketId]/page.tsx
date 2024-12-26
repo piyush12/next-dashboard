@@ -1,6 +1,8 @@
 import React from "react";
 
+import { Ticket } from "@prisma/client";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { Header } from "@/components/Header";
 import Box from "@/components/Shared/Box";
@@ -8,12 +10,13 @@ import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import TicketCard from "@/features/tickets/components/TicketCard";
+import { getTicket } from "@/features/tickets/queries/get-ticket";
 
 async function page({ params }: { params: Promise<{ ticketId: string }> }) {
   const { ticketId } = await params;
-
-  if (!ticketId || isNaN(parseInt(ticketId))) {
-    return null;
+  const ticket = (await getTicket(ticketId)) as Ticket;
+  if (!ticket) {
+    notFound();
   }
 
   return (
@@ -32,7 +35,7 @@ async function page({ params }: { params: Promise<{ ticketId: string }> }) {
         </Link>
       </Box>
 
-      <TicketCard />
+      <TicketCard ticket={ticket} />
     </Box>
   );
 }

@@ -12,22 +12,26 @@
     "build-storybook": "storybook build",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
-    "type": "tsc --noEmit"
+    "postinstall": "prisma generate",
+    "type": "tsc --noEmit",
+    "prisma-seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@prisma/client": "^6.1.0",
     "@tabler/icons-react": "^3.18.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.3",
     "js-cookie": "^3.0.5",
-    "next": "^15.0.3",
+    "next": "^15.1.2",
     "next-auth": "^5.0.0-beta.25",
     "pg": "^8.13.1",
     "react": "^19.0.0-rc.1",
     "react-dom": "^19.0.0-rc.1",
     "react-hook-form": "^7.54.0",
     "tailwind-merge": "^2.5.3",
+    "tsx": "^4.19.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -45,23 +49,24 @@
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/pg": "^8.11.10",
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2",
     "drizzle-kit": "^0.28.1",
     "eslint": "^8",
-    "eslint-config-next": "^15.0.3",
+    "eslint-config-next": "^15.1.2",
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-storybook": "^0.8.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
+    "prisma": "^6.1.0",
     "storybook": "^8.3.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
   "overrides": {
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2"
   }
 }

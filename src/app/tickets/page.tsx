@@ -3,11 +3,14 @@ import Box from "@/components/Shared/Box";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import TicketCard from "@/features/tickets/components/TicketCard";
+import { getTickets } from "@/features/tickets/queries/get-tickets";
 
-function Tickets() {
+async function Tickets() {
   // async function handleSignOut() {
   //   "use server";
   // }
+
+  const tickets = await getTickets();
 
   return (
     <Box>
@@ -17,12 +20,15 @@ function Tickets() {
           <Header hasSearch={false} />
         </Paper>
       </Flex>
-      <Flex direction="row" className="min-h-screen flex-wrap">
-        <TicketCard />
-        <TicketCard />
-        <TicketCard />
-        <TicketCard />
-        <TicketCard />
+      <Flex
+        direction="column"
+        className="min-h-screen flex-wrap"
+        align="center"
+        gap="6"
+      >
+        {tickets.map((ticket) => {
+          return <TicketCard key={ticket.id} ticket={ticket} />;
+        })}
       </Flex>
     </Box>
   );
