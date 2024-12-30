@@ -12,6 +12,7 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   variant?: "filled" | "outline";
   fullWidth?: boolean;
   children?: React.ReactNode;
+  defaultValue?: string | undefined;
 };
 
 function TextField({
@@ -22,6 +23,7 @@ function TextField({
   variant = "outline",
   fullWidth,
   children,
+  defaultValue = "",
   ...props
 }: TextFieldProps) {
   const fullWidthClass = fullWidth ? "fullWidth" : "";
@@ -39,6 +41,7 @@ function TextField({
         type={type}
         placeholder={placeholder}
         className={textFieldClass}
+        defaultValue={defaultValue}
         {...props}
       />
       {children}

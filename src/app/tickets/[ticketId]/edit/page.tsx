@@ -1,23 +1,21 @@
-import React from "react";
-
 import { Ticket } from "@prisma/client";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 import { Header } from "@/components/Header";
 import Box from "@/components/Shared/Box";
 import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
-import TicketCard from "@/features/tickets/components/TicketCard";
+import TicketForm from "@/features/tickets/components/Form/Form";
 import { getTicket } from "@/features/tickets/queries/get-ticket";
 
-async function page({ params }: { params: Promise<{ ticketId: string }> }) {
+async function TicketEdit({
+  params,
+}: {
+  params: Promise<{ ticketId: string }>;
+}) {
   const { ticketId } = await params;
   const ticket = (await getTicket(ticketId)) as Ticket;
-  if (!ticket) {
-    notFound();
-  }
 
   return (
     <Box>
@@ -28,17 +26,32 @@ async function page({ params }: { params: Promise<{ ticketId: string }> }) {
         </Paper>
       </Flex>
       <Box className="p-4">
-        <Link href="/tickets">
+        <Link href={`/tickets/${ticket.id}`}>
           <Button variant="outline" color="primary">
-            Tickets
+            Go Back
           </Button>
         </Link>
       </Box>
-      <Flex justify="center">
-        <TicketCard ticket={ticket} isDetail />
+
+      <Flex
+        direction="column"
+        className="min-h-screen flex-wrap"
+        align="center"
+        gap="6"
+      >
+        <Paper className="w-[400px] p-6">
+          <TicketForm
+            isEdit
+            defaultValue={{
+              title: ticket.title,
+              content: ticket.content,
+              id: ticket.id,
+            }}
+          />
+        </Paper>
       </Flex>
     </Box>
   );
 }
 
-export default page;
+export default TicketEdit;

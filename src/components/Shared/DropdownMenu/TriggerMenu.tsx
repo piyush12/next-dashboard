@@ -11,7 +11,9 @@ function TriggerMenu({ children }: { children: React.ReactNode }) {
   };
 
   return React.Children.map(children, (child) => {
-    const childElement = child as React.ReactElement;
+    const childElement = child as React.ReactElement<{
+      onClick?: React.MouseEventHandler;
+    }>;
     return React.cloneElement(childElement, { onClick: handleClick });
   });
 }

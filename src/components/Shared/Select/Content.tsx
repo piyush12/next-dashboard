@@ -65,7 +65,9 @@ function Content({
       }}
     >
       {React.Children.map(children, (child) => {
-        const childElement = child as React.ReactElement;
+        const childElement = child as React.ReactElement<{
+          onChange?: (value: string) => void;
+        }>;
         return React.cloneElement(childElement, { onChange: onChange });
       })}
       {/* {children} */}

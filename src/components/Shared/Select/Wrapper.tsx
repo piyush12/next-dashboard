@@ -36,7 +36,9 @@ function Wrapper<T>({
   return (
     <Box className={className} ref={elementRef}>
       {React.Children.map(children, (child) => {
-        const childElement = child as React.ReactElement;
+        const childElement = child as React.ReactElement<{
+          onChange: (value: T) => void;
+        }>;
         return React.cloneElement(childElement, {
           onChange: onChange,
         });
