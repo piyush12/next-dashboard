@@ -53,6 +53,17 @@ function TicketCard({
         <Text as="p" variant="body1">
           {ticket.content}
         </Text>
+        <Flex justify="between" className="mt-5">
+          <Text as="p" variant="body1" color="warning">
+            {ticket.deadline}
+          </Text>
+          <Text as="p" variant="body1" color="info">
+            {new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+            }).format(ticket.bounty / 100)}
+          </Text>
+        </Flex>
       </CardContent>
       <CardFooter className="flex justify-end">
         {!isDetail ? (

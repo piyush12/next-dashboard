@@ -46,6 +46,8 @@ async function TicketEdit({
               title: ticket.title,
               content: ticket.content,
               id: ticket.id,
+              bounty: ticket.bounty,
+              deadline: ticket.deadline,
             }}
           />
         </Paper>

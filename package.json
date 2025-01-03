@@ -14,7 +14,8 @@
     "migrate": "drizzle-kit migrate",
     "postinstall": "prisma generate",
     "type": "tsc --noEmit",
-    "prisma-seed": "tsx prisma/seed.ts"
+    "prisma-seed": "tsx prisma/seed.ts",
+    "format": "prettier --write \"src/**/*.{js,jsx,css, tsx, ts}\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
