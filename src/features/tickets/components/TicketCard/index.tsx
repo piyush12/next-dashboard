@@ -1,8 +1,10 @@
 import { Ticket } from "@prisma/client";
+import { IconDotsVertical } from "@tabler/icons-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Badge } from "@/components/Shared/Badge";
+import Box from "@/components/Shared/Box";
 import Button from "@/components/Shared/Button";
 import {
   Card,
@@ -13,14 +15,16 @@ import {
   CardTitle,
 } from "@/components/Shared/Card";
 import Flex from "@/components/Shared/Flex";
+import Select from "@/components/Shared/Select/Select";
 import Text from "@/components/Shared/Text";
 import { Colors } from "@/types/global";
 
 import { deleteTicket } from "../../actions/delete-ticket";
+import { updateTicketStatus } from "../../actions/update-ticket-status";
 
-const BADGE_COLOR: {
-  [key: string]: Colors;
-} = {
+type IStatus = "DONE" | "IN_PROGRESS" | "OPEN";
+
+const BADGE_COLOR: Record<IStatus, Colors> = {
   DONE: "success",
   IN_PROGRESS: "primary",
   OPEN: "info",
@@ -39,15 +43,46 @@ function TicketCard({
     redirect("/tickets");
   }
 
+  async function handleChangeStatus(status: IStatus) {
+    "use server";
+    await updateTicketStatus(ticket.id, status);
+    redirect("/tickets");
+  }
+
   return (
     <Card className="w-1/3">
-      <CardHeader>
-        <CardTitle>{ticket.title}</CardTitle>
-        <CardSubTitle>
-          <Badge color={BADGE_COLOR[ticket.status] as Colors}>
-            {ticket.status}
-          </Badge>
-        </CardSubTitle>
+      <CardHeader className="flex-row justify-between">
+        <Box>
+          <CardTitle>{ticket.title}</CardTitle>
+          {!isDetail && (
+            <CardSubTitle>
+              <Badge color={BADGE_COLOR[ticket.status] as Colors}>
+                {ticket.status}
+              </Badge>
+            </CardSubTitle>
+          )}
+        </Box>
+        {isDetail && (
+          <Select onChange={handleChangeStatus} value="light">
+            <Select.Trigger chevron={false} className="!pr-0">
+              <IconDotsVertical stroke={2} />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Item active={ticket.status === "OPEN"} value="OPEN">
+                OPEN
+              </Select.Item>
+              <Select.Item
+                active={ticket.status === "IN_PROGRESS"}
+                value="IN_PROGRESS"
+              >
+                IN_PROGRESS
+              </Select.Item>
+              <Select.Item active={ticket.status === "DONE"} value="DONE">
+                DONE
+              </Select.Item>
+            </Select.Content>
+          </Select>
+        )}
       </CardHeader>
       <CardContent>
         <Text as="p" variant="body1">

@@ -1,6 +1,6 @@
 import React from "react";
 
-import clsx from "clsx";
+import { cn } from "@/utils/utils";
 
 type Idrection = "row" | "column" | "row-reverse" | "column-reverse";
 type IJustify = "start" | "center" | "end" | "between";
@@ -89,7 +89,7 @@ function Flex<T extends React.ElementType>({
 
   const flexDirection = direction ? flexDirectionClass(direction) : "";
 
-  const FlexClass = clsx(
+  const FlexClass = cn(
     justifyContent,
     alignItems,
     gapClass,
