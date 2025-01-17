@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z, ZodError } from "zod";
 
+import { setCookie } from "@/actions/cookies";
 import prisma from "@/lib/prisma";
 
 export type ActionState = {
@@ -57,8 +58,10 @@ export const upsertTicket = async (
       message: "Something went wrong",
     };
   }
+  await setCookie("toast", "Ticket Added");
   revalidatePath("/tickets");
   if (ticketId) {
+    await setCookie("toast", "Ticket Updated");
     redirect(`/tickets/${ticketId}`);
   }
   return { message: "" };

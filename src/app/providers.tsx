@@ -5,6 +5,8 @@ import React from "react";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
+import { RedirectToast } from "@/components/RedirectToast";
+import { ToastContextProvider } from "@/components/Shared/Toast/context";
 import { ITheme, ThemeContextProvider } from "@/hooks/useTheme";
 
 function Providers({
@@ -19,7 +21,10 @@ function Providers({
   return (
     <SessionProvider session={session}>
       <ThemeContextProvider initialTheme={initialTheme}>
-        {children}
+        <ToastContextProvider>
+          {children}
+          <RedirectToast />
+        </ToastContextProvider>
       </ThemeContextProvider>
     </SessionProvider>
   );

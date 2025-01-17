@@ -5,6 +5,7 @@ import { Public_Sans } from "next/font/google";
 import { cookies } from "next/headers";
 
 import { auth } from "@/auth";
+import { Toastify } from "@/components/Shared/Toast";
 import { ITheme } from "@/hooks/useTheme";
 
 import Providers from "./providers";
@@ -44,7 +45,9 @@ export default async function RootLayout({
   return (
     <html lang="en" className={theme} data-theme={theme}>
       <Providers session={session} initialTheme={getTheme}>
-        <body className={`${publicSans.className}`}>{children}</body>
+        <body className={`${publicSans.className}`}>
+          {children} <Toastify />
+        </body>
       </Providers>
     </html>
   );
