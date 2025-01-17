@@ -37,8 +37,8 @@
 
     &.error {
       @apply bg-error-500
-      placeholder-error-300
-      text-white;
+      text-white
+      placeholder-error-300;
       &:focus {
         @apply border-error-500;
       }
