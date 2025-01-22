@@ -1,55 +1,52 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import React, { useEffect } from "react";
+
 import Link from "next/link";
-import { useForm } from "react-hook-form";
 
 import Box from "@/components/Shared/Box";
-import Button from "@/components/Shared/Button";
 import Checkbox from "@/components/Shared/Checkbox";
 import Flex from "@/components/Shared/Flex";
 import Label from "@/components/Shared/Label";
 import NavLink from "@/components/Shared/Link";
 import Text from "@/components/Shared/Text";
 import TextField from "@/components/Shared/TextField";
+import { useToastContext } from "@/components/Shared/Toast/context";
+import { SubmitButton } from "@/components/SubmitButton";
+import { EmptyActionState } from "@/utils/utils";
 
-import { LoginFormData, SignInSchema } from "./validation";
+import { signIn } from "../actions/signin";
 
-function Login({
-  onFormSubmit,
-}: {
-  onFormSubmit: (data: LoginFormData) => void;
-}) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(SignInSchema),
-  });
+function Login() {
+  const [state, action] = React.useActionState(signIn, EmptyActionState);
+  const { error } = useToastContext();
+  const { fieldErrors: errors, message } = state;
 
-  const onSubmit = (data: LoginFormData) => {
-    onFormSubmit(data);
-  };
+  useEffect(() => {
+    if (message) {
+      error(message);
+    }
+  }, [state, message, error]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form action={action}>
       <Flex gap="4" direction="column" className="mt-6">
         <Flex direction="column" gap="2">
           <Label htmlFor="email">Email or Username</Label>
-          <TextField type="text" id="email" {...register("email")} />
-          {errors && errors.email?.message && (
+          <TextField type="text" id="email" name="email" />
+          {errors && errors.email && (
             <Text as="p" variant="helper" color="error">
-              {errors.email.message}
+              {errors.email[0]}
             </Text>
           )}
         </Flex>
 
         <Flex direction="column" gap="2">
           <Label htmlFor="password">Password</Label>
-          <TextField type="password" id="password" {...register("password")} />
-          {errors && errors.password?.message && (
+          <TextField type="password" id="password" name="password" />
+          {errors && errors.password && (
             <Text as="p" variant="helper" color="error">
-              {errors.password.message}
+              {errors.password[0]}
             </Text>
           )}
         </Flex>
@@ -60,9 +57,9 @@ function Login({
         </Flex>
 
         <Box>
-          <Button variant="default" fullwidth type="submit">
+          <SubmitButton variant="default" fullwidth type="submit">
             Login
-          </Button>
+          </SubmitButton>
         </Box>
         <Box className="mt-2 text-center">
           <Text as="p" variant="body1">

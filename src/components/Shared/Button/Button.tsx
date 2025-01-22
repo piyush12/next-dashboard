@@ -5,8 +5,9 @@ import { cn } from "@/utils/utils";
 
 import styles from "./Button.module.css";
 
+export type ButtonVariant = "default" | "label" | "outline" | "text";
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "default" | "label" | "outline" | "text";
+  variant?: ButtonVariant;
   children: React.ReactNode;
   fullwidth?: boolean;
   size?: Size;

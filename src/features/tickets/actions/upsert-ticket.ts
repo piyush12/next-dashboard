@@ -5,12 +5,7 @@ import { z, ZodError } from "zod";
 
 import { setCookie } from "@/actions/cookies";
 import prisma from "@/lib/prisma";
-
-export type ActionState = {
-  message?: string;
-  payload?: FormData;
-  fieldErrors?: Record<string, string[] | undefined>;
-};
+import { ActionState } from "@/utils/utils";
 
 const formSchema = z.object({
   title: z.string().trim().min(5),

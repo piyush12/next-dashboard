@@ -1,75 +1,81 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
+
 import Link from "next/link";
-import { useForm } from "react-hook-form";
 
 import Box from "@/components/Shared/Box";
-import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
 import Label from "@/components/Shared/Label";
 import NavLink from "@/components/Shared/Link";
 import Text from "@/components/Shared/Text";
 import TextField from "@/components/Shared/TextField";
+import { SubmitButton } from "@/components/SubmitButton";
+import { EmptyActionState } from "@/utils/utils";
 
-import { SignUpFormData, SignUpSchema } from "./validation";
+import { signUp } from "../actions/signup";
 
-
-function RegisterComponent({
-  onFormSubmit,
-}: {
-  onFormSubmit: (data: SignUpFormData) => void;
-}) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignUpFormData>({
-    resolver: zodResolver(SignUpSchema),
-  });
-
-  const onSubmit = (data: SignUpFormData) => {
-    onFormSubmit(data);
-  };
-
+function RegisterComponent() {
+  const [state, action] = React.useActionState(signUp, EmptyActionState);
+  const { fieldErrors: errors, payload } = state;
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form action={action}>
       <Flex gap="4" direction="column" className="mt-6">
         <Flex direction="column" gap="2">
           <Label htmlFor="name">Name</Label>
-          <TextField type="text" id="name" {...register("name")} />
-          {errors && errors.name?.message && (
+          <TextField
+            type="text"
+            id="name"
+            name="name"
+            defaultValue={payload?.get("name") as string}
+          />
+          {errors && errors?.name && (
             <Text as="p" variant="helper" color="error">
-              {errors.name.message}
+              {errors.name[0]}
             </Text>
           )}
         </Flex>
 
         <Flex direction="column" gap="2">
           <Label htmlFor="email">Email</Label>
-          <TextField type="text" id="email" {...register("email")} />
-          {errors && errors.email?.message && (
+          <TextField
+            type="text"
+            id="email"
+            name="email"
+            defaultValue={payload?.get("email") as string}
+          />
+          {errors && errors.email && (
             <Text as="p" variant="helper" color="error">
-              {errors.email.message}
+              {errors.email[0]}
             </Text>
           )}
         </Flex>
         <Flex direction="column" gap="2">
           <Label htmlFor="username">Username</Label>
-          <TextField type="text" id="username" {...register("username")} />
-          {errors && errors.username?.message && (
+          <TextField
+            type="text"
+            id="username"
+            name="username"
+            defaultValue={payload?.get("username") as string}
+          />
+          {errors && errors.username && (
             <Text as="p" variant="helper" color="error">
-              {errors.username.message}
+              {errors.username[0]}
             </Text>
           )}
         </Flex>
 
         <Flex direction="column" gap="2">
           <Label htmlFor="password">Password</Label>
-          <TextField type="password" id="password" {...register("password")} />
-          {errors && errors.password?.message && (
+          <TextField
+            type="password"
+            id="password"
+            name="password"
+            defaultValue={payload?.get("password") as string}
+          />
+          {errors && errors.password && (
             <Text as="p" variant="helper" color="error">
-              {errors.password.message}
+              {errors.password[0]}
             </Text>
           )}
         </Flex>
@@ -79,19 +85,20 @@ function RegisterComponent({
           <TextField
             type="confirmPassword"
             id="confirmPassword"
-            {...register("confirmPassword")}
+            name="confirmPassword"
+            defaultValue={payload?.get("confirmPassword") as string}
           />
-          {errors && errors.confirmPassword?.message && (
+          {errors && errors.confirmPassword && (
             <Text as="p" variant="helper" color="error">
-              {errors.confirmPassword.message}
+              {errors.confirmPassword[0]}
             </Text>
           )}
         </Flex>
 
         <Box>
-          <Button variant="default" fullwidth type="submit">
+          <SubmitButton variant="default" fullwidth type="submit">
             Signup
-          </Button>
+          </SubmitButton>
         </Box>
         <Box className="mt-2 text-center">
           <Text as="p" variant="body1">

@@ -7,52 +7,55 @@ const ToastContext = React.createContext<ITOASTCONTEXT | null>(null);
 const ToastContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [toasts, setToasts] = React.useState<ITOASTS>([]);
 
-  const success = (message: string) => {
-    setToasts([
-      ...toasts,
+  const success = React.useCallback((message: string) => {
+    setToasts((prevToast) => [
+      ...prevToast,
       {
         id: crypto.randomUUID(),
         type: "success",
         message: message,
       },
     ]);
-  };
-  const error = (message: string) => {
-    setToasts([
-      ...toasts,
+  }, []);
+
+  const error = React.useCallback((message: string) => {
+    setToasts((prevToasts) => [
+      ...prevToasts,
       {
         id: crypto.randomUUID(),
         type: "error",
         message: message,
       },
     ]);
-  };
-  const warning = (message: string) => {
-    setToasts([
-      ...toasts,
+  }, []);
+
+  const warning = React.useCallback((message: string) => {
+    setToasts((prevToast) => [
+      ...prevToast,
       {
         id: crypto.randomUUID(),
         type: "warning",
         message: message,
       },
     ]);
-  };
-  const info = (message: string) => {
-    setToasts([
-      ...toasts,
+  }, []);
+
+  const info = React.useCallback((message: string) => {
+    setToasts((prevToast) => [
+      ...prevToast,
       {
         id: crypto.randomUUID(),
         type: "info",
         message: message,
       },
     ]);
-  };
+  }, []);
 
-  const dismiss = (id: string) => {
+  const dismiss = React.useCallback((id: string) => {
     setToasts((prevToast) => {
       return prevToast.filter((toast) => toast.id !== id);
     });
-  };
+  }, []);
 
   return (
     <ToastContext.Provider

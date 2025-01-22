@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   IconDeviceLaptop,
@@ -7,12 +7,17 @@ import {
   IconSearch,
   IconSun,
 } from "@tabler/icons-react";
+import { User } from "lucia";
 
 import Flex from "@/components/Shared/Flex";
 import Select from "@/components/Shared/Select/Select";
+import { signOut } from "@/features/auth/actions/signout";
+import { getAuth } from "@/features/auth/queries/getAuth";
 import { useTheme } from "@/hooks/useTheme";
 
+import Button from "../Shared/Button";
 import TextField from "../Shared/TextField";
+import { SubmitButton } from "../SubmitButton";
 
 type IMode = "light" | "dark" | "system";
 type IModeData = Record<IMode, { label: string; icon: React.ReactNode }>;
@@ -25,7 +30,22 @@ const modeData: IModeData = {
 
 function Header({ hasSearch = true }) {
   const { theme, onChangeTheme } = useTheme();
+  const [user, setUser] = useState<User | null>(null);
   const justify = hasSearch ? "between" : "end";
+  const [isFetched, setFetched] = useState(false);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const { user } = await getAuth();
+      setUser(user);
+      setFetched(true);
+    }
+    fetchUser();
+  }, []);
+
+  if (!isFetched) {
+    return false;
+  }
 
   return (
     <Flex align={"center"} justify={justify}>
@@ -57,6 +77,16 @@ function Header({ hasSearch = true }) {
           })}
         </Select.Content>
       </Select>
+      {user ? (
+        <form action={signOut}>
+          <SubmitButton type="submit">Sign Out</SubmitButton>
+        </form>
+      ) : (
+        <>
+          <Button variant="default">Sign In</Button>
+          <Button variant="default">Register </Button>
+        </>
+      )}
     </Flex>
   );
 }

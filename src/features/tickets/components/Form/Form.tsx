@@ -6,10 +6,10 @@ import Label from "@/components/Shared/Label";
 import Text from "@/components/Shared/Text";
 import { TextArea } from "@/components/Shared/TextArea";
 import TextField from "@/components/Shared/TextField";
+import SubmitButton from "@/components/SubmitButton/SubmitButton";
+import { EmptyActionState } from "@/utils/utils";
 
-import { ActionState, upsertTicket } from "../../actions/upsert-ticket";
-
-import SubmitButton from "./SubmitButton";
+import { upsertTicket } from "../../actions/upsert-ticket";
 
 type FormDataProps = {
   title: string;
@@ -22,11 +22,6 @@ type FormDataProps = {
 type TicketFormProps = {
   isEdit?: boolean;
   defaultValue?: FormDataProps;
-};
-
-const EmptyActionState: ActionState = {
-  message: "",
-  fieldErrors: {},
 };
 
 function TicketForm({ isEdit = false, defaultValue }: TicketFormProps) {
@@ -111,7 +106,9 @@ function TicketForm({ isEdit = false, defaultValue }: TicketFormProps) {
         </Flex>
 
         <Flex gap="2" direction="column">
-          <SubmitButton>{isEdit ? "Edit" : "Create"}</SubmitButton>
+          <SubmitButton type="submit">
+            {isEdit ? "Edit" : "Create"}
+          </SubmitButton>
         </Flex>
       </Flex>
       <Text color="error" as="p" className="mt-2">

@@ -1,11 +1,10 @@
 import { IconBrandGithub } from "@tabler/icons-react";
 
 import { signIn } from "@/auth";
-import LoginComponent from "@/components/Auth/Login";
-import { LoginFormData } from "@/components/Auth/validation";
 import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
 import Text from "@/components/Shared/Text";
+import LoginComponent from "@/features/auth/components/Login";
 import { ROUTES } from "@/utils/constants";
 
 function Login() {
@@ -16,18 +15,13 @@ function Login() {
     });
   }
 
-  async function onFormSubmit(params: LoginFormData) {
-    "use server";
-    console.log("params", params);
-  }
-
   return (
     <Flex gap="2" direction="column">
       <Text as="h1" variant="h4">
         Welcome to Vuexy! 👋🏻
       </Text>
       <Text as="p">Please sign-in to your account and start the adventure</Text>
-      <LoginComponent onFormSubmit={onFormSubmit} />
+      <LoginComponent />
       <Button
         onClick={handleSignInGithub}
         fullwidth
