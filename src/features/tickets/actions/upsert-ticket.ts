@@ -4,7 +4,10 @@ import { redirect } from "next/navigation";
 import { z, ZodError } from "zod";
 
 import { setCookie } from "@/actions/cookies";
+import { getAuthRedirect } from "@/features/auth/queries/get-auth-redirect";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import prisma from "@/lib/prisma";
+import { generateRoutePath, ROUTES } from "@/path";
 import { ActionState } from "@/utils/utils";
 
 const formSchema = z.object({
@@ -19,7 +22,21 @@ export const upsertTicket = async (
   _actionState: ActionState,
   formData: FormData,
 ): Promise<ActionState> => {
+  const { user } = await getAuthRedirect();
   try {
+    if (ticketId) {
+      const ticket = await prisma.ticket.findUnique({
+        where: {
+          id: ticketId,
+        },
+      });
+      if (!ticket || !isOwner(user, ticket)) {
+        return {
+          message: "User not authorized",
+        };
+      }
+    }
+
     const data = {
       title: formData.get("title"),
       content: formData.get("content"),
@@ -29,6 +46,7 @@ export const upsertTicket = async (
     const parsedData = formSchema.parse(data);
     const dbData = {
       ...parsedData,
+      userId: user.id,
       bounty: parsedData.bounty * 100,
     };
     await prisma.ticket.upsert({
@@ -54,10 +72,10 @@ export const upsertTicket = async (
     };
   }
   await setCookie("toast", "Ticket Added");
-  revalidatePath("/tickets");
+  revalidatePath(generateRoutePath(ROUTES.TICKETS));
   if (ticketId) {
     await setCookie("toast", "Ticket Updated");
-    redirect(`/tickets/${ticketId}`);
+    redirect(generateRoutePath(ROUTES.TICKETS_DETAIL, { id: ticketId }));
   }
   return { message: "" };
 };

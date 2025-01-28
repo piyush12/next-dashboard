@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { verifyPasswordHash } from "@/features/password/utils/hash-and-verify";
 import { createSession } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
+import { generateRoutePath, ROUTES } from "@/path";
 import { generateRandomToken } from "@/utils/crypto";
 import { ActionState, formError } from "@/utils/utils";
 
@@ -42,5 +43,5 @@ export const signIn = async (
   } catch (error) {
     return formError(error);
   }
-  redirect("/tickets");
+  redirect(generateRoutePath(ROUTES.TICKETS));
 };

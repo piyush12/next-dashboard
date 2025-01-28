@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Public_Sans } from "next/font/google";
 import { cookies } from "next/headers";
 
-import { auth } from "@/auth";
 import { Toastify } from "@/components/Shared/Toast";
 import { ITheme } from "@/hooks/useTheme";
 
@@ -38,13 +37,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
   const savedTheme = (await cookies()).get("color-theme");
   const getTheme = (savedTheme?.value as ITheme) || getSystemTheme();
   const theme = getTheme === "system" ? "dark" : getTheme;
   return (
     <html lang="en" className={theme} data-theme={theme}>
-      <Providers session={session} initialTheme={getTheme}>
+      <Providers initialTheme={getTheme}>
         <body className={`${publicSans.className}`}>
           {children} <Toastify />
         </body>

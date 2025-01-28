@@ -1,4 +1,4 @@
-import { Ticket } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { IconDotsVertical } from "@tabler/icons-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -17,6 +17,9 @@ import {
 import Flex from "@/components/Shared/Flex";
 import Select from "@/components/Shared/Select/Select";
 import Text from "@/components/Shared/Text";
+import { getAuth } from "@/features/auth/queries/getAuth";
+import { isOwner } from "@/features/auth/utils/is-owner";
+import { generateRoutePath, ROUTES } from "@/path";
 import { Colors } from "@/types/global";
 
 import { deleteTicket } from "../../actions/delete-ticket";
@@ -30,23 +33,34 @@ const BADGE_COLOR: Record<IStatus, Colors> = {
   OPEN: "info",
 };
 
-function TicketCard({
+async function TicketCard({
   ticket,
   isDetail = false,
 }: {
-  ticket: Ticket;
+  ticket: Prisma.TicketGetPayload<{
+    include: {
+      user: {
+        select: {
+          username: true;
+        };
+      };
+    };
+  }>;
   isDetail?: boolean;
 }) {
+  const { user } = await getAuth();
+  const isTicketOwner = isOwner(user, ticket);
   async function handleDelete() {
     "use server";
-    await deleteTicket(ticket.id);
-    redirect("/tickets");
+    const res = await deleteTicket(ticket.id);
+    if (res?.id) {
+      redirect(generateRoutePath(ROUTES.TICKETS));
+    }
   }
 
   async function handleChangeStatus(status: IStatus) {
     "use server";
     await updateTicketStatus(ticket.id, status);
-    redirect("/tickets");
   }
 
   return (
@@ -62,7 +76,7 @@ function TicketCard({
             </CardSubTitle>
           )}
         </Box>
-        {isDetail && (
+        {isTicketOwner && isDetail && (
           <Select onChange={handleChangeStatus} value="light">
             <Select.Trigger chevron={false} className="!pr-0">
               <IconDotsVertical stroke={2} />
@@ -90,7 +104,7 @@ function TicketCard({
         </Text>
         <Flex justify="between" className="mt-5">
           <Text as="p" variant="body1" color="warning">
-            {ticket.deadline}
+            {ticket.deadline} by {ticket.user.username}
           </Text>
           <Text as="p" variant="body1" color="info">
             {new Intl.NumberFormat("en-US", {
@@ -107,9 +121,11 @@ function TicketCard({
               View
             </Button>
           </Link>
-        ) : (
+        ) : isTicketOwner ? (
           <Flex gap="4">
-            <Link href={`/tickets/${ticket.id}/edit`}>
+            <Link
+              href={generateRoutePath(ROUTES.TICKETS_EDIT, { id: ticket.id })}
+            >
               <Button variant="default" color="primary" type="button">
                 Edit
               </Button>
@@ -124,7 +140,7 @@ function TicketCard({
               Delete
             </Button>
           </Flex>
-        )}
+        ) : null}
       </CardFooter>
     </Card>
   );

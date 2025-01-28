@@ -7,12 +7,7 @@ import TicketCard from "@/features/tickets/components/TicketCard";
 import { getTickets } from "@/features/tickets/queries/get-tickets";
 
 async function Tickets() {
-  // async function handleSignOut() {
-  //   "use server";
-  // }
-
   const tickets = await getTickets();
-
   return (
     <Box>
       <Flex className="p-4">

@@ -62,7 +62,7 @@ const Toast = ({
   message: string;
 }) => {
   const className = cn(
-    "shadow-dark-lg w-[360px] rounded-md bg-light-paperBg p-3 dark:bg-dark-paperBg ",
+    "w-[360px] rounded-md bg-light-paperBg p-3 dark:bg-dark-paperBg ",
     TOAST_COLOR[type as ITOASTTYPE],
   );
   const { dismiss } = useToastContext();

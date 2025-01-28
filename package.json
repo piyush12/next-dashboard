@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run check && next build",
     "start": "next start",
     "lint": "next lint",
     "lint-fix": "next lint --fix",
@@ -16,7 +16,10 @@
     "type": "tsc --noEmit",
     "prisma-seed": "tsx prisma/seed.ts",
     "format": "prettier --write \"src/**/*.{js,jsx,css, tsx, ts}\"",
-    "check": "npm run lint && npm run type && npm run format"
+    "check": "npm run format && npm run lint && npm run type && vitest run",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "test-ui": "vitest --ui"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -58,6 +61,7 @@
     "@types/pg": "^8.11.10",
     "@types/react": "19.0.2",
     "@types/react-dom": "19.0.2",
+    "@vitest/ui": "^3.0.4",
     "drizzle-kit": "^0.28.1",
     "eslint": "^8",
     "eslint-config-next": "^15.1.2",
@@ -70,7 +74,8 @@
     "prisma": "^6.1.0",
     "storybook": "^8.3.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.0.4"
   },
   "overrides": {
     "@types/react": "19.0.2",

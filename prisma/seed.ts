@@ -1,10 +1,24 @@
+import { hash } from "@node-rs/argon2";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+const users = [
+  {
+    name: "John",
+    username: "admin",
+    email: "admin@admin.com",
+  },
+  {
+    name: "Jane",
+    username: "user",
+    // use your own email here
+    email: "hello@test.com",
+  },
+];
+
 const tickets = [
   {
-    // id: "1",
     title: "Ticket 1",
     content: "First ticket from DB.",
     status: "DONE" as const,
@@ -12,7 +26,6 @@ const tickets = [
     bounty: 499,
   },
   {
-    // id: "2",
     title: "Ticket 2",
     content: "Second ticket from DB.",
     status: "OPEN" as const,
@@ -20,7 +33,6 @@ const tickets = [
     bounty: 399,
   },
   {
-    // id: "3",
     title: "Ticket 3",
     content: "Third ticket from DB.",
     status: "IN_PROGRESS" as const,
@@ -30,14 +42,30 @@ const tickets = [
 ];
 
 const seed = async () => {
-  console.time("DB Seed: Started ...");
+  const t0 = performance.now();
+  console.log("DB Seed: Started ...");
 
+  await prisma.user.deleteMany();
   await prisma.ticket.deleteMany();
 
-  await prisma.ticket.createMany({
-    data: tickets,
+  const passwordHash = await hash("secret");
+
+  const dbUsers = await prisma.user.createManyAndReturn({
+    data: users.map((user) => ({
+      ...user,
+      passwordHash,
+    })),
   });
-  console.timeEnd(`DB Seed: Started ...`);
+
+  await prisma.ticket.createMany({
+    data: tickets.map((ticket) => ({
+      ...ticket,
+      userId: dbUsers[0].id,
+    })),
+  });
+
+  const t1 = performance.now();
+  console.log(`DB Seed: Finished (${t1 - t0}ms)`);
 };
 
 seed();

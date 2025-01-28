@@ -3,7 +3,7 @@ import React from "react";
 import { IconEye } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { users } from "@/app/invoices/page";
+import { users } from "@/app/invoices/utils";
 import { Badge } from "@/components/Shared/Badge";
 import Flex from "@/components/Shared/Flex";
 import { Pagination } from "@/components/Shared/Pagination";

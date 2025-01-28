@@ -1,13 +1,17 @@
 import { Ticket } from "@prisma/client";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { Header } from "@/components/Header";
 import Box from "@/components/Shared/Box";
 import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
+import { getAuth } from "@/features/auth/queries/getAuth";
+import { isOwner } from "@/features/auth/utils/is-owner";
 import TicketForm from "@/features/tickets/components/Form/Form";
 import { getTicket } from "@/features/tickets/queries/get-ticket";
+import { generateRoutePath, ROUTES } from "@/path";
 
 async function TicketEdit({
   params,
@@ -15,7 +19,15 @@ async function TicketEdit({
   params: Promise<{ ticketId: string }>;
 }) {
   const { ticketId } = await params;
+  const { user } = await getAuth();
   const ticket = (await getTicket(ticketId)) as Ticket;
+
+  const isTicketFound = !!ticket;
+  const isTicketOwner = isOwner(user, ticket);
+
+  if (!isTicketFound || !isTicketOwner) {
+    notFound();
+  }
 
   return (
     <Box>
@@ -26,7 +38,11 @@ async function TicketEdit({
         </Paper>
       </Flex>
       <Box className="p-4">
-        <Link href={`/tickets/${ticket.id}`}>
+        <Link
+          href={generateRoutePath(ROUTES.TICKETS_DETAIL, {
+            id: ticket.id,
+          })}
+        >
           <Button variant="outline" color="primary">
             Go Back
           </Button>

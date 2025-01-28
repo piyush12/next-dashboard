@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Ticket } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -11,10 +9,19 @@ import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import TicketCard from "@/features/tickets/components/TicketCard";
 import { getTicket } from "@/features/tickets/queries/get-ticket";
+import { generateRoutePath, ROUTES } from "@/path";
 
 async function page({ params }: { params: Promise<{ ticketId: string }> }) {
   const { ticketId } = await params;
-  const ticket = (await getTicket(ticketId)) as Ticket;
+  const ticket = (await getTicket(ticketId)) as Prisma.TicketGetPayload<{
+    include: {
+      user: {
+        select: {
+          username: true;
+        };
+      };
+    };
+  }>;
   if (!ticket) {
     notFound();
   }
@@ -28,7 +35,7 @@ async function page({ params }: { params: Promise<{ ticketId: string }> }) {
         </Paper>
       </Flex>
       <Box className="p-4">
-        <Link href="/tickets">
+        <Link href={generateRoutePath(ROUTES.TICKETS)}>
           <Button variant="outline" color="primary">
             Tickets
           </Button>
