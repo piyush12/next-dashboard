@@ -1,10 +1,10 @@
-import React, { forwardRef, Ref } from "react";
+import React, { forwardRef, HTMLAttributes, Ref } from "react";
 
 import clsx from "clsx";
 
-type BoxProps = {
+type BoxProps = HTMLAttributes<HTMLElement> & {
   as?: "div" | "span" | "footer";
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   display?:
     | "none"

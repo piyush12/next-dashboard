@@ -22,6 +22,7 @@ async function page({ params }: { params: Promise<{ ticketId: string }> }) {
       };
     };
   }>;
+
   if (!ticket) {
     notFound();
   }
@@ -41,6 +42,7 @@ async function page({ params }: { params: Promise<{ ticketId: string }> }) {
           </Button>
         </Link>
       </Box>
+
       <Flex justify="center">
         <TicketCard ticket={ticket} isDetail />
       </Flex>

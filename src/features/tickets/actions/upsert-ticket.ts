@@ -72,10 +72,14 @@ export const upsertTicket = async (
     };
   }
   await setCookie("toast", "Ticket Added");
-  revalidatePath(generateRoutePath(ROUTES.TICKETS));
+  const path = generateRoutePath(ROUTES.TICKETS);
+  revalidatePath(path);
   if (ticketId) {
     await setCookie("toast", "Ticket Updated");
-    redirect(generateRoutePath(ROUTES.TICKETS_DETAIL, { id: ticketId }));
+    const redirectPath = generateRoutePath(ROUTES.TICKETS_DETAIL, {
+      id: ticketId,
+    });
+    redirect(redirectPath);
   }
   return { message: "" };
 };

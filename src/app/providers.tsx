@@ -2,23 +2,13 @@
 
 import React from "react";
 
-import { RedirectToast } from "@/components/RedirectToast";
 import { ToastContextProvider } from "@/components/Shared/Toast/context";
-import { ITheme, ThemeContextProvider } from "@/hooks/useTheme";
+import { ThemeContextProvider } from "@/hooks/useTheme";
 
-function Providers({
-  children,
-  initialTheme,
-}: {
-  children: React.ReactNode;
-  initialTheme: ITheme;
-}) {
+function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeContextProvider initialTheme={initialTheme}>
-      <ToastContextProvider>
-        {children}
-        <RedirectToast />
-      </ToastContextProvider>
+    <ThemeContextProvider>
+      <ToastContextProvider>{children}</ToastContextProvider>
     </ThemeContextProvider>
   );
 }

@@ -1,7 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { IconDotsVertical } from "@tabler/icons-react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 import { Badge } from "@/components/Shared/Badge";
 import Box from "@/components/Shared/Box";
@@ -22,8 +21,9 @@ import { isOwner } from "@/features/auth/utils/is-owner";
 import { generateRoutePath, ROUTES } from "@/path";
 import { Colors } from "@/types/global";
 
-import { deleteTicket } from "../../actions/delete-ticket";
 import { updateTicketStatus } from "../../actions/update-ticket-status";
+
+import DeleteButton from "./DeleteButton";
 
 type IStatus = "DONE" | "IN_PROGRESS" | "OPEN";
 
@@ -50,13 +50,15 @@ async function TicketCard({
 }) {
   const { user } = await getAuth();
   const isTicketOwner = isOwner(user, ticket);
-  async function handleDelete() {
-    "use server";
-    const res = await deleteTicket(ticket.id);
-    if (res?.id) {
-      redirect(generateRoutePath(ROUTES.TICKETS));
-    }
-  }
+
+  // async function handleDelete() {
+  //   "use server";
+  //   console.log("handleDelete");
+  //   const res = await deleteTicket(ticket.id);
+  //   if (res?.id) {
+  //     redirect(generateRoutePath(ROUTES.TICKETS));
+  //   }
+  // }
 
   async function handleChangeStatus(status: IStatus) {
     "use server";
@@ -130,15 +132,7 @@ async function TicketCard({
                 Edit
               </Button>
             </Link>
-
-            <Button
-              variant="default"
-              color="error"
-              type="button"
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
+            <DeleteButton id={ticket.id} />
           </Flex>
         ) : null}
       </CardFooter>

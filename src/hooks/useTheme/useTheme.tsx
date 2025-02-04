@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import Cookie from "js-cookie";
 
@@ -11,20 +11,34 @@ type ThemeContextProps = {
   onChangeTheme: (theme: ITheme) => void;
 };
 
+function getSystemTheme(): ITheme {
+  if (typeof window !== "undefined" && window.matchMedia) {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+  return "light";
+}
+
 const ThemeContext = React.createContext<ThemeContextProps | undefined>(
   undefined,
 );
 
 const KEY = "color-theme";
 
-const ThemeContextProvider = ({
-  children,
-  initialTheme,
-}: {
-  children: React.ReactNode;
-  initialTheme: ITheme;
-}) => {
+const ThemeContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const savedTheme = Cookie.get("color-theme");
+  const getTheme = (savedTheme as ITheme) || getSystemTheme();
+  const initialTheme = getTheme === "system" ? "system" : getTheme;
   const [theme, setTheme] = React.useState<ITheme>(initialTheme);
+  const ref = useRef(false);
+
+  useEffect(() => {
+    if (!ref.current && initialTheme) {
+      onChangeTheme(initialTheme);
+      ref.current = true;
+    }
+  }, [initialTheme]);
 
   const onChangeTheme = (theme: ITheme) => {
     setTheme(theme);
