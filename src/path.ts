@@ -5,6 +5,8 @@ export const ROUTES = {
   TICKETS_EDIT: "/tickets/:id/edit",
   LOGIN: "/login",
   REGISTER: "/signup",
+  MYTICKETS: "/tickets/my-ticket",
+  ACCOUNT: "/account/profile",
 } as const;
 
 export type RoutePathType = (typeof ROUTES)[keyof typeof ROUTES];

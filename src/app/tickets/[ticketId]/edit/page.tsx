@@ -1,17 +1,13 @@
 import { Ticket } from "@prisma/client";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Header } from "@/components/Header";
 import Box from "@/components/Shared/Box";
-import Button from "@/components/Shared/Button";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import { getAuth } from "@/features/auth/queries/getAuth";
 import { isOwner } from "@/features/auth/utils/is-owner";
 import TicketForm from "@/features/tickets/components/Form/Form";
 import { getTicket } from "@/features/tickets/queries/get-ticket";
-import { generateRoutePath, ROUTES } from "@/path";
 
 async function TicketEdit({
   params,
@@ -31,24 +27,6 @@ async function TicketEdit({
 
   return (
     <Box>
-      <Flex className="p-4">
-        {/* TOP MENU */}
-        <Paper className="w-full pb-3 pl-6 pr-6 pt-3">
-          <Header hasSearch={false} />
-        </Paper>
-      </Flex>
-      <Box className="p-4">
-        <Link
-          href={generateRoutePath(ROUTES.TICKETS_DETAIL, {
-            id: ticket.id,
-          })}
-        >
-          <Button variant="outline" color="primary">
-            Go Back
-          </Button>
-        </Link>
-      </Box>
-
       <Flex
         direction="column"
         className="min-h-screen flex-wrap"

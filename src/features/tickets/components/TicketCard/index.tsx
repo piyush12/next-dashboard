@@ -51,15 +51,6 @@ async function TicketCard({
   const { user } = await getAuth();
   const isTicketOwner = isOwner(user, ticket);
 
-  // async function handleDelete() {
-  //   "use server";
-  //   console.log("handleDelete");
-  //   const res = await deleteTicket(ticket.id);
-  //   if (res?.id) {
-  //     redirect(generateRoutePath(ROUTES.TICKETS));
-  //   }
-  // }
-
   async function handleChangeStatus(status: IStatus) {
     "use server";
     await updateTicketStatus(ticket.id, status);
@@ -118,7 +109,9 @@ async function TicketCard({
       </CardContent>
       <CardFooter className="flex justify-end">
         {!isDetail ? (
-          <Link href={`tickets/${ticket.id}`}>
+          <Link
+            href={generateRoutePath(ROUTES.TICKETS_DETAIL, { id: ticket.id })}
+          >
             <Button variant="default" color="primary" type="button">
               View
             </Button>
