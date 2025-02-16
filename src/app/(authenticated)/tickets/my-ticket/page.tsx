@@ -1,19 +1,22 @@
-import React from "react";
-
 import AppBreadCrumb from "@/components/AppBreadcrumb/app-breadcrumb";
 import Box from "@/components/Shared/Box";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import Text from "@/components/Shared/Text";
 import { getAuth } from "@/features/auth/queries/getAuth";
-import TicketCard from "@/features/tickets/components/TicketCard";
-import { getTickets } from "@/features/tickets/queries/get-tickets";
+import TicketList from "@/features/tickets/components/ticket-list";
 import { generateRoutePath, ROUTES } from "@/path";
 
-async function MyTickets() {
+import { searchParams } from "../types";
+
+async function MyTickets({
+  searchParams,
+}: {
+  searchParams: Promise<searchParams>;
+}) {
   const { user } = await getAuth();
+  const searchParam = await searchParams;
   if (!user?.id) return;
-  const tickets = await getTickets(user?.id);
 
   return (
     <Box>
@@ -42,9 +45,7 @@ async function MyTickets() {
           My Tickets
         </Text>
 
-        {tickets.map((ticket) => {
-          return <TicketCard key={ticket.id} ticket={ticket} />;
-        })}
+        <TicketList userId={user.id} searchParams={searchParam} />
       </Flex>
     </Box>
   );

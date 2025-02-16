@@ -2,6 +2,8 @@ import { FC, ReactNode } from "react";
 
 import { cn } from "@/utils/utils";
 
+import { ButtonVariant } from "../Button/Button";
+
 import Content from "./Content";
 import MenuProvider from "./Context";
 import Item from "./Item";
@@ -32,14 +34,16 @@ type SelectTriggerProps = {
   children?: ReactNode;
   className?: string;
   chevron?: boolean;
+  variant?: ButtonVariant;
 };
 const SelectTrigger = ({
   children,
   className,
   chevron = true,
+  variant,
 }: SelectTriggerProps) => {
   return (
-    <TriggerMenu className={className} chevron={chevron}>
+    <TriggerMenu className={className} chevron={chevron} variant={variant}>
       {children}
     </TriggerMenu>
   );

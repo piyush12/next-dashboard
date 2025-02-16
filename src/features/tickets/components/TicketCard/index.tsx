@@ -57,7 +57,7 @@ async function TicketCard({
   }
 
   return (
-    <Card className="w-1/3">
+    <Card>
       <CardHeader className="flex-row justify-between">
         <Box>
           <CardTitle>{ticket.title}</CardTitle>
