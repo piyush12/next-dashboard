@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Public_Sans } from "next/font/google";
 import { cookies } from "next/headers";
 
-import AppSidebar from "@/components/AppSidebar/app-sidebar";
 import { Toastify } from "@/components/Shared/Toast";
 import { ITheme } from "@/hooks/useTheme";
 
@@ -36,13 +35,7 @@ export default async function RootLayout({
     <html lang="en" className={theme} data-theme={theme}>
       <Providers>
         <body className={`${publicSans.className}`}>
-          <div className="flex">
-            <AppSidebar />
-            <main className="w-full">
-              {children} <Toastify />
-            </main>
-          </div>
-
+          {children} <Toastify />
           <div id="modal"></div>
         </body>
       </Providers>

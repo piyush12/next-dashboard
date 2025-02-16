@@ -15,9 +15,9 @@ import { signOut } from "@/features/auth/actions/signout";
 import { getAuth } from "@/features/auth/queries/getAuth";
 import { useTheme } from "@/hooks/useTheme";
 
-import Button from "../Shared/Button";
-import TextField from "../Shared/TextField";
-import { SubmitButton } from "../SubmitButton";
+import Button from "../../../components/Shared/Button";
+import TextField from "../../../components/Shared/TextField";
+import { SubmitButton } from "../../../components/SubmitButton";
 
 type IMode = "light" | "dark" | "system";
 type IModeData = Record<IMode, { label: string; icon: React.ReactNode }>;

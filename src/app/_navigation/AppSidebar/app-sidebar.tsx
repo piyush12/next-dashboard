@@ -37,16 +37,22 @@ const SIDEBARMENUITEMS = [
 
 function AppSidebar() {
   const path = usePathname();
+
   return (
     <Sidebar>
       <SidebarHeader />
       <SidebarContent>
         <SidebarGroup>
           {SIDEBARMENUITEMS.map((menuItems) => {
+            const isTicketsSection = menuItems.href === ROUTES.TICKETS;
+            const isActive =
+              path.startsWith(menuItems.href) &&
+              !(isTicketsSection && path.startsWith(ROUTES.MYTICKETS));
+
             return (
               <SidebarItem
                 key={menuItems.title}
-                active={menuItems.href === path}
+                active={isActive}
                 render={(isOpen: boolean) => (
                   <SidebarLink
                     href={menuItems.href}
