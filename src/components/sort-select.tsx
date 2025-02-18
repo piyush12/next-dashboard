@@ -1,6 +1,8 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useQueryState } from "nuqs";
+
+import { sortParser } from "@/features/tickets/search-tickets";
 
 import Select from "./Shared/Select/Select";
 
@@ -13,26 +15,16 @@ type Props = {
 };
 
 function SortSelect({ options, defaultValue }: Props) {
-  const sortParams = useSearchParams();
-  const { replace } = useRouter();
-  const pathName = usePathname();
+  const [sort, setSort] = useQueryState("sort", sortParser);
 
-  const value = sortParams.get("sort") || defaultValue;
+  const value = sort || defaultValue;
 
   const onHandleChange = (optionValue: string) => {
-    const params = new URLSearchParams(sortParams);
-    if (optionValue) {
-      params.set("sort", optionValue);
-    } else {
-      params.delete("sort");
-    }
-    replace(`${pathName}?${params.toString()}`, {
-      scroll: false,
-    });
+    setSort(optionValue);
   };
 
   return (
-    <Select onChange={onHandleChange} value="light">
+    <Select onChange={onHandleChange} value={value}>
       <Select.Trigger chevron={false} variant="outline">
         {value}
       </Select.Trigger>

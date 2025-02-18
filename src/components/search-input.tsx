@@ -1,30 +1,21 @@
 "use client";
-import React, { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useQueryState } from "nuqs";
 
 import Flex from "@/components/Shared/Flex";
 import TextField from "@/components/Shared/TextField";
+import { searchParser } from "@/features/tickets/search-tickets";
 import useDebounce from "@/hooks/useDebounce";
 
 function SearchInput({ placeholder }: { placeholder: string }) {
-  const pathName = usePathname();
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const [search, setSearch] = useQueryState("search", searchParser);
 
   const handleSeaerch = useDebounce((event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = event;
-    const newSearchParams = new URLSearchParams(searchParams);
-    if (value) {
-      newSearchParams.set("search", value);
-    } else {
-      newSearchParams.delete("search");
-    }
-    replace(`${pathName}?${newSearchParams.toString()}`, {
-      scroll: false,
-    });
+    setSearch(value);
   }, 250);
 
   return (
@@ -34,7 +25,7 @@ function SearchInput({ placeholder }: { placeholder: string }) {
         fullWidth
         placeholder={placeholder}
         onChange={handleSeaerch}
-        defaultValue={searchParams.get("search") as string}
+        defaultValue={search as string}
       />
     </Flex>
   );

@@ -3,6 +3,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { Public_Sans } from "next/font/google";
 import { cookies } from "next/headers";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Toastify } from "@/components/Shared/Toast";
 import { ITheme } from "@/hooks/useTheme";
@@ -35,7 +36,9 @@ export default async function RootLayout({
     <html lang="en" className={theme} data-theme={theme}>
       <Providers>
         <body className={`${publicSans.className}`}>
-          {children} <Toastify />
+          <NuqsAdapter>
+            {children} <Toastify />
+          </NuqsAdapter>
           <div id="modal"></div>
         </body>
       </Providers>
