@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { IconDotsVertical } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -16,7 +16,6 @@ import {
 import Flex from "@/components/Shared/Flex";
 import Select from "@/components/Shared/Select/Select";
 import Text from "@/components/Shared/Text";
-import { getAuth } from "@/features/auth/queries/getAuth";
 import { isOwner } from "@/features/auth/utils/is-owner";
 import { generateRoutePath, ROUTES } from "@/path";
 import { Colors } from "@/types/global";
@@ -36,6 +35,7 @@ const BADGE_COLOR: Record<IStatus, Colors> = {
 async function TicketCard({
   ticket,
   isDetail = false,
+  user,
 }: {
   ticket: Prisma.TicketGetPayload<{
     include: {
@@ -47,8 +47,8 @@ async function TicketCard({
     };
   }>;
   isDetail?: boolean;
+  user?: User | null;
 }) {
-  const { user } = await getAuth();
   const isTicketOwner = isOwner(user, ticket);
 
   async function handleChangeStatus(status: IStatus) {

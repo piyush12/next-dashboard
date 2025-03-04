@@ -5,14 +5,13 @@ import Paper from "@/components/Shared/Paper";
 import Text from "@/components/Shared/Text";
 import { getAuth } from "@/features/auth/queries/getAuth";
 import TicketList from "@/features/tickets/components/ticket-list";
+import { ParsedSearchParams } from "@/features/tickets/search-tickets";
 import { generateRoutePath, ROUTES } from "@/path";
-
-import { searchParams } from "../types";
 
 async function MyTickets({
   searchParams,
 }: {
-  searchParams: Promise<searchParams>;
+  searchParams: Promise<ParsedSearchParams>;
 }) {
   const { user } = await getAuth();
   const searchParam = await searchParams;

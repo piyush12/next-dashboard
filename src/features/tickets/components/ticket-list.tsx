@@ -1,10 +1,12 @@
-import { searchParams } from "@/app/(authenticated)/tickets/types";
 import SearchInput from "@/components/search-input";
 import Flex from "@/components/Shared/Flex";
 import SortSelect from "@/components/sort-select";
+import { getAuth } from "@/features/auth/queries/getAuth";
 
 import { getTickets } from "../queries/get-tickets";
+import { ParsedSearchParams } from "../search-tickets";
 
+import TicketPagination from "./pagination";
 import TicketCard from "./TicketCard";
 
 async function TicketList({
@@ -12,9 +14,13 @@ async function TicketList({
   searchParams,
 }: {
   userId?: string;
-  searchParams: searchParams;
+  searchParams: ParsedSearchParams;
 }) {
-  const tickets = await getTickets(userId, searchParams);
+  const { list: tickets, paginationMetadata } = await getTickets(
+    userId,
+    searchParams,
+  );
+  const { user } = await getAuth();
   return (
     <Flex direction="column" className="mb-8 w-[400px] gap-6">
       <Flex>
@@ -35,8 +41,9 @@ async function TicketList({
       </Flex>
 
       {tickets.map((ticket) => {
-        return <TicketCard key={ticket.id} ticket={ticket} />;
+        return <TicketCard key={ticket.id} ticket={ticket} user={user} />;
       })}
+      <TicketPagination paginationMetadata={paginationMetadata} />
     </Flex>
   );
 }

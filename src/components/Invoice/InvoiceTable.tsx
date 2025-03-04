@@ -33,9 +33,8 @@ const columns = [
 
 async function InvoiceTable() {
   const results = await db.select().from(Invoices);
-  async function handleChange(page: number) {
+  async function handleChange() {
     "use server";
-    console.log("page", page);
   }
   return (
     <Table>
