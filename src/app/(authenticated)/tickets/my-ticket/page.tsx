@@ -5,13 +5,15 @@ import Paper from "@/components/Shared/Paper";
 import Text from "@/components/Shared/Text";
 import { getAuth } from "@/features/auth/queries/getAuth";
 import TicketList from "@/features/tickets/components/ticket-list";
-import { ParsedSearchParams } from "@/features/tickets/search-tickets";
+import { searchParamsCache } from "@/features/tickets/search-tickets";
 import { generateRoutePath, ROUTES } from "@/path";
+
+import { searchParams } from "../types";
 
 async function MyTickets({
   searchParams,
 }: {
-  searchParams: Promise<ParsedSearchParams>;
+  searchParams: Promise<searchParams>;
 }) {
   const { user } = await getAuth();
   const searchParam = await searchParams;
@@ -44,7 +46,10 @@ async function MyTickets({
           My Tickets
         </Text>
 
-        <TicketList userId={user.id} searchParams={searchParam} />
+        <TicketList
+          userId={user.id}
+          searchParams={searchParamsCache.parse(searchParam)}
+        />
       </Flex>
     </Box>
   );

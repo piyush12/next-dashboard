@@ -1,11 +1,13 @@
 import React from "react";
 
+import { Colors, TextVariant } from "@/types/global";
 import { cn } from "@/utils/utils";
 
 import Box from "../Box";
 import Flex from "../Flex";
 import Paper from "../Paper";
 import Text from "../Text";
+import { AllowedTags } from "../Text/Text";
 
 type IProps = {
   children: React.ReactNode;
@@ -38,9 +40,14 @@ function CardTitle({ children }: IProps) {
   );
 }
 
-function CardSubTitle({ children }: IProps) {
+function CardSubTitle({
+  variant = "subtitle2",
+  color,
+  children,
+  as = "span",
+}: IProps & { variant?: TextVariant; color?: Colors; as?: AllowedTags }) {
   return (
-    <Text as="span" variant="subtitle2">
+    <Text as={as} variant={variant} color={color}>
       {children}
     </Text>
   );
@@ -58,4 +65,4 @@ function CardFooter({ children, className }: IProps) {
   );
 }
 
-export { Card, CardHeader, CardTitle, CardSubTitle, CardContent, CardFooter };
+export { Card, CardContent, CardFooter, CardHeader, CardSubTitle, CardTitle };

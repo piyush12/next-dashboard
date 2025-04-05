@@ -184,6 +184,29 @@
     &:active:not(:disabled) {
       @apply text-opacity-80;
     }
+
+    &.primary {
+      @apply text-purple-500;
+    }
+
+    &.secondary {
+      @apply text-gray-500;
+    }
+    &.success {
+      @apply text-success-500;
+    }
+
+    &.info {
+      @apply text-info-500;
+    }
+
+    &.error {
+      @apply text-error-500;
+    }
+
+    &.warning {
+      @apply text-warning-500;
+    }
   }
 
   &.large {

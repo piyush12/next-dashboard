@@ -1,10 +1,10 @@
-import React, { InputHTMLAttributes } from "react";
+import { TextareaHTMLAttributes } from "react";
 
 import { cn } from "@/utils/utils";
 
 import styles from "./TextArea.module.css";
 
-type TextAreaProps = InputHTMLAttributes<HTMLTextAreaElement> & {
+type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   placeholder: string;
   className?: string;
   color?: "success" | "error";

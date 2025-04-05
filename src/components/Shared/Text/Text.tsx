@@ -6,9 +6,17 @@ import { Colors, TextVariant } from "@/types/global";
 
 import styles from "./Text.module.css";
 
-type AllowedTags = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "p";
+export type AllowedTags =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "span"
+  | "p";
 
-type TextProps<T extends React.ElementType> = {
+export type TextProps<T extends React.ElementType> = {
   variant?: TextVariant;
   children: React.ReactNode;
   as: AllowedTags;

@@ -21,7 +21,7 @@ export const paginationOption = {
 
 export const paginationParser = {
   page: parseAsInteger.withDefault(0),
-  size: parseAsInteger.withDefault(10),
+  size: parseAsInteger.withDefault(5),
 };
 
 export const searchParamsCache = createSearchParamsCache({

@@ -21,6 +21,7 @@ async function TicketList({
     searchParams,
   );
   const { user } = await getAuth();
+
   return (
     <Flex direction="column" className="mb-8 w-[400px] gap-6">
       <Flex>
