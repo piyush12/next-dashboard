@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 
 import Box from "@/components/Shared/Box";
-import Checkbox from "@/components/Shared/Checkbox";
 import Flex from "@/components/Shared/Flex";
 import Label from "@/components/Shared/Label";
 import NavLink from "@/components/Shared/Link";
@@ -51,8 +50,7 @@ function Login() {
           )}
         </Flex>
 
-        <Flex align="center" justify="between">
-          <Checkbox id="remember">Remember me</Checkbox>
+        <Flex align="center" justify="end">
           <NavLink href="/forgot-password">Forgot password</NavLink>
         </Flex>
 

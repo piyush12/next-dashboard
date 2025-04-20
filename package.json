@@ -19,7 +19,8 @@
     "check": "npm run format && npm run lint && npm run type && vitest run",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "test-ui": "vitest --ui"
+    "test-ui": "vitest --ui",
+    "email": "email dev --dir src/emails"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -28,6 +29,7 @@
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
     "@prisma/client": "^6.1.0",
+    "@react-email/components": "^0.0.36",
     "@tabler/icons-react": "^3.18.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
@@ -41,7 +43,9 @@
     "pg": "^8.13.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-email": "^4.0.7",
     "react-hook-form": "^7.54.0",
+    "resend": "^4.3.0",
     "tailwind-merge": "^2.5.3",
     "tsx": "^4.19.2",
     "zod": "^3.23.8"

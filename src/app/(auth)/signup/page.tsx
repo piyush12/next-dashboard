@@ -6,7 +6,7 @@ function SignUp() {
   return (
     <Flex gap="2" direction="column">
       <Text as="h1" variant="h4">
-        Welcome to Vuexy! 🚀
+        Welcome to Reactify! 🚀
       </Text>
       <Text as="p">Make your app management easy and fun!</Text>
       <RegisterComponent />

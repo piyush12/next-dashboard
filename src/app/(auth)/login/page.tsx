@@ -16,7 +16,7 @@ function Login() {
   return (
     <Flex gap="2" direction="column">
       <Text as="h1" variant="h4">
-        Welcome to Vuexy! 👋🏻
+        Welcome to Reactify! 👋🏻
       </Text>
       <Text as="p">Please sign-in to your account and start the adventure</Text>
       <LoginComponent />

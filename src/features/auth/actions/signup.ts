@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-import { hashPassword } from "@/features/password/utils/hash-and-verify";
+import { hashPassword } from "@/features/utils/hash-and-verify";
 import { createSession } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
 import { generateRoutePath, ROUTES } from "@/path";

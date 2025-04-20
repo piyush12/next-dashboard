@@ -7,6 +7,7 @@ export const ROUTES = {
   REGISTER: "/signup",
   MYTICKETS: "/tickets/my-ticket",
   ACCOUNT: "/account/profile",
+  PASSWORD_REST_PATH: "/reset-password",
 } as const;
 
 export type RoutePathType = (typeof ROUTES)[keyof typeof ROUTES];
