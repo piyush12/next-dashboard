@@ -100,6 +100,11 @@ function RegisterComponent() {
             Signup
           </SubmitButton>
         </Box>
+        {state.message && (
+          <Text as="p" variant="helper" color="error">
+            {state.message}
+          </Text>
+        )}
         <Box className="mt-2 text-center">
           <Text as="p" variant="body1">
             Already have an account?{" "}

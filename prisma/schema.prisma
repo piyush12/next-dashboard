@@ -9,15 +9,17 @@ datasource db {
 }
 
 model User {
-  id                 String               @id @default(cuid())
-  name               String
-  username           String               @unique
-  passwordHash       String
-  email              String               @unique
-  sessions           Session[]
-  tickets            Ticket[]
-  comments           Comment[]
-  PasswordResetToken PasswordResetToken[]
+  id                    String                  @id @default(cuid())
+  name                  String
+  username              String                  @unique
+  passwordHash          String
+  email                 String                  @unique
+  emailVerified         Boolean                 @default(false)
+  sessions              Session[]
+  tickets               Ticket[]
+  comments              Comment[]
+  PasswordResetToken    PasswordResetToken[]
+  emailVerificationCode EmailVerificationCode[]
 }
 
 model Session {
@@ -63,6 +65,17 @@ model PasswordResetToken {
   expiresAt DateTime
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model EmailVerificationCode {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  code      String
+  email     String
 
   @@index([userId])
 }

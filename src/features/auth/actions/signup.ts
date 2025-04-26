@@ -1,7 +1,9 @@
 "use server";
 
+import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
 
+import { generateEmailVerificationCode } from "@/features/utils/generate-email-verification-code";
 import { hashPassword } from "@/features/utils/hash-and-verify";
 import { createSession } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
@@ -30,11 +32,22 @@ export const signUp = async (
       },
     });
 
+    await generateEmailVerificationCode(user.id, user.email);
+
     const sessionToken = generateRandomToken();
     const session = await createSession(sessionToken, user.id);
 
     await setSessionCookie(sessionToken, session.expiresAt);
   } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      return {
+        message: "Either email or username is already in use",
+        payload: formData,
+      };
+    }
     return formError(error, formData);
   }
   redirect(generateRoutePath(ROUTES.TICKETS));

@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 
+import { generateEmailVerificationCode } from "@/features/utils/generate-email-verification-code";
 import { verifyPasswordHash } from "@/features/utils/hash-and-verify";
 import { createSession } from "@/lib/lucia";
 import prisma from "@/lib/prisma";
@@ -36,6 +37,13 @@ export const signIn = async (
         message: "Incorrect Email or Password",
       };
     }
+    const verificationCode = await generateEmailVerificationCode(
+      user.id,
+      user.email,
+    );
+
+    console.log("verificationCode", verificationCode);
+
     const sessionToken = generateRandomToken();
     const session = await createSession(sessionToken, user.id);
 
