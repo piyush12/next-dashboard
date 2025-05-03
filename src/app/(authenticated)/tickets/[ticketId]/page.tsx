@@ -6,6 +6,7 @@ import Box from "@/components/Shared/Box";
 import Flex from "@/components/Shared/Flex";
 import Paper from "@/components/Shared/Paper";
 import Text from "@/components/Shared/Text";
+import Attachment from "@/features/attachment/components/attachment";
 import { getAuth } from "@/features/auth/queries/getAuth";
 import CommentCreateForm from "@/features/comment/components/comment-create-form";
 import CommentItem from "@/features/comment/components/comment-item";
@@ -14,6 +15,7 @@ import TicketCard from "@/features/tickets/components/TicketCard";
 import { getTicket } from "@/features/tickets/queries/get-ticket";
 import { generateRoutePath, ROUTES } from "@/path";
 
+const isAdmin = false;
 async function page({ params }: { params: Promise<{ ticketId: string }> }) {
   const { ticketId } = await params;
 
@@ -59,6 +61,11 @@ async function page({ params }: { params: Promise<{ ticketId: string }> }) {
         gap="6"
       >
         <TicketCard ticket={ticket} isDetail user={user} />
+        {isAdmin && (
+          <Paper className="w-full pb-3 pl-6 pr-6 pt-3">
+            <Attachment ticketId={ticketId} />
+          </Paper>
+        )}
         <Paper className="w-full pb-3 pl-6 pr-6 pt-3">
           <CommentCreateForm ticketId={ticketId} />
         </Paper>

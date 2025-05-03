@@ -1,7 +1,7 @@
 "use server";
 import { z } from "zod";
 
-import ResetPasswordEmail from "@/emails/password-reset-email";
+import { ResetPasswordEmail } from "@/emails/password-reset-email";
 import { generatePasswordResetLink } from "@/features/utils/password-reset-link";
 import prisma from "@/lib/prisma";
 import { resend } from "@/lib/resend";
