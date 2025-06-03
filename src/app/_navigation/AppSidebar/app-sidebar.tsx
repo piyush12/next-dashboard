@@ -1,79 +1,59 @@
-"use client";
-import React from "react";
-
-import { IconBook, IconLibrary, IconUser } from "@tabler/icons-react";
-import { usePathname } from "next/navigation";
+import { IconBook, IconLibrary, IconUser } from '@tabler/icons-react';
+import Link from 'next/link';
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarHeader,
-  SidebarItem,
-} from "@/components/Shared/Sidebar";
-import { generateRoutePath, ROUTES } from "@/path";
-import { cn } from "@/utils/utils";
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import { generateRoutePath, ROUTES } from '@/path';
 
-import SidebarLink from "./sidebar-link";
-import SidebarLinkText from "./sidebar-link-text";
-
-const SIDEBARMENUITEMS = [
+// Menu items.
+const items = [
   {
-    title: "All Tickets",
+    title: 'All Tickets',
     icon: <IconLibrary stroke={2} />,
     href: generateRoutePath(ROUTES.TICKETS),
   },
   {
-    title: "My Tickets",
+    title: 'My Tickets',
     icon: <IconBook stroke={2} />,
     href: generateRoutePath(ROUTES.MYTICKETS),
   },
   {
-    title: "My Account",
+    title: 'Ecommerce',
     icon: <IconUser stroke={2} />,
-    href: generateRoutePath(ROUTES.ACCOUNT),
+    href: generateRoutePath(ROUTES.ECOMMERCE_PRODUCTS_LIST),
   },
 ];
 
-function AppSidebar() {
-  const path = usePathname();
-
+export function AppSidebar() {
   return (
-    <Sidebar>
-      <SidebarHeader />
+    <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          {SIDEBARMENUITEMS.map((menuItems) => {
-            const isTicketsSection = menuItems.href === ROUTES.TICKETS;
-            const isActive =
-              path.startsWith(menuItems.href) &&
-              !(isTicketsSection && path.startsWith(ROUTES.MYTICKETS));
-
-            return (
-              <SidebarItem
-                key={menuItems.title}
-                active={isActive}
-                render={(isOpen: boolean) => (
-                  <SidebarLink
-                    href={menuItems.href}
-                    className={cn("flex w-full gap-4", {
-                      "flex-row-reverse": isOpen,
-                    })}
-                  >
-                    <SidebarLinkText
-                      icon={menuItems.icon}
-                      text={menuItems.title}
-                      isOpen={isOpen}
-                    />
-                  </SidebarLink>
-                )}
-              />
-            );
-          })}
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild className="pb-6 pt-6">
+                    {item.href && (
+                      <Link href={item.href}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>
+                    )}
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );
 }
-
-export default AppSidebar;

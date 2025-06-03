@@ -9,6 +9,7 @@ export const ROUTES = {
   ACCOUNT: "/account/profile",
   PASSWORD_REST_PATH: "/reset-password",
   VERIFY_EMAIL: "/verify-email",
+  ECOMMERCE_PRODUCTS_LIST: "/ecommerce/products/list",
 } as const;
 
 export type RoutePathType = (typeof ROUTES)[keyof typeof ROUTES];

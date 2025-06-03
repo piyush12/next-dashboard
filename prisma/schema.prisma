@@ -90,6 +90,34 @@ model Attachments {
   @@index([ticketId])
 }
 
+model Ecommerce {
+  id            String          @id @default(cuid())
+  name          String
+  description   String
+  image         String
+  price         Float
+  status        EcommerceStatus @default(IN_ACTIVE)
+  createdAt     DateTime        @default(now())
+  quantity      Int
+  category      String
+  updatedAt     DateTime        @updatedAt
+  galleryImages GalleryImages[]
+}
+
+model GalleryImages {
+  id          String    @id @default(cuid())
+  imageUrl    String
+  ecommerceId String
+  Ecommerce   Ecommerce @relation(fields: [ecommerceId], references: [id], onDelete: Cascade)
+
+  @@index([ecommerceId])
+}
+
+enum EcommerceStatus {
+  IN_ACTIVE
+  PUBLISHED
+}
+
 enum TicketStatus {
   OPEN
   IN_PROGRESS

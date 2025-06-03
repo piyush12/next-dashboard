@@ -1,26 +1,26 @@
-import { TextareaHTMLAttributes } from "react";
+import { TextareaHTMLAttributes } from 'react';
 
-import { cn } from "@/utils/utils";
+import { cn } from '@/utils/utils';
 
-import styles from "./TextArea.module.css";
+import styles from './TextArea.module.css';
 
 type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  placeholder: string;
+  placeholder?: string;
   className?: string;
-  color?: "success" | "error";
-  variant?: "filled" | "outline";
+  color?: 'success' | 'error';
+  variant?: 'filled' | 'outline';
 };
 function TextArea({
   className,
   color,
-  variant = "outline",
+  variant = 'outline',
   placeholder,
   ...props
 }: TextAreaProps) {
   const textAreaClass = cn(
-    "rounded-md px-[14px] py-[7px] text-inputText text-light-primary outline-none",
+    'rounded-md px-[14px] py-[7px] text-inputText text-light-primary outline-none',
     styles.textField,
-    styles[color || ""],
+    styles[color || ''],
     styles[variant],
     className,
   );
@@ -34,6 +34,6 @@ function TextArea({
   );
 }
 
-TextArea.displayName = "TextArea";
+TextArea.displayName = 'TextArea';
 
 export default TextArea;

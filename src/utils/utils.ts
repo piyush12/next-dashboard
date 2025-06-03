@@ -1,6 +1,6 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { ZodError } from "zod";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import { ZodError } from 'zod';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -24,7 +24,7 @@ export function formError(error: unknown, formData?: FormData) {
     };
   } else {
     return {
-      message: "Something went wrong",
+      message: 'Something went wrong',
       payload: formData,
     };
   }
@@ -37,6 +37,16 @@ export type ActionState = {
 };
 
 export const EmptyActionState: ActionState = {
-  message: "",
+  message: '',
   fieldErrors: {},
 };
+
+export const priceFormat = (
+  price: number,
+  currency: string = 'INR',
+  lang: string = 'en-IN',
+) =>
+  new Intl.NumberFormat(lang, {
+    style: 'currency',
+    currency: currency,
+  }).format(price);

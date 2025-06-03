@@ -1,11 +1,12 @@
-import React from "react";
+'use client';
+import React from 'react';
 
-import { useFormStatus } from "react-dom";
+import { useFormStatus } from 'react-dom';
 
-import { ComponentLoader } from "@/components/ComponentLoader";
-import Button from "@/components/Shared/Button";
+import { ComponentLoader } from '@/components/ComponentLoader';
+import Button from '@/components/Shared/Button';
 
-import { ButtonProps } from "../Shared/Button/Button";
+import { ButtonProps } from '../Shared/Button/Button';
 
 function Loader() {
   return (
@@ -17,7 +18,7 @@ function Loader() {
 
 function SubmitButton({
   children,
-  variant = "default",
+  variant = 'default',
   fullwidth = false,
   type,
   ...props

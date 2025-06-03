@@ -1,23 +1,26 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentProps } from 'react';
 
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import styles from "./Label.module.css";
+import { cn } from '@/utils/utils';
 
-type LabelProps = ComponentProps<"label"> & {
-  htmlFor: string;
+import styles from './Label.module.css';
+
+type LabelProps = ComponentProps<'label'> & {
+  htmlFor?: string;
   children: React.ReactNode;
+  className?: string;
 };
 
-function Label({ htmlFor, children, ...props }: LabelProps) {
+function Label({ htmlFor, children, className, ...props }: LabelProps) {
   const labelClass = clsx(styles.label);
   return (
-    <label htmlFor={htmlFor} className={labelClass} {...props}>
+    <label htmlFor={htmlFor} className={cn(labelClass, className)} {...props}>
       {children}
     </label>
   );
 }
 
-Label.displayName = "Label";
+Label.displayName = 'Label';
 
 export default Label;
